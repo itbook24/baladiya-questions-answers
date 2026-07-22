@@ -1,533 +1,1204 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>খাদ্য নিরাপত্তা প্রশ্নব্যাংক</title>
-<style>
-  /* ===== সমস্ত স্টাইল আগের মতোই আছে ===== */
-  :root{
-    --ink:#16231F;
-    --pine:#1B3832;
-    --pine-2:#234A42;
-    --sage:#EFF4EF;
-    --sage-2:#E2EBE3;
-    --card:#FFFFFF;
-    --line:#D9E3DA;
-    --amber:#DE7530;
-    --amber-dark:#B85C22;
-    --amber-tint:#FBE9DB;
-    --true:#2E8B57;
-    --true-tint:#E3F3EA;
-    --false:#C0473F;
-    --false-tint:#FBE7E5;
-    --shadow: 0 1px 2px rgba(22,35,31,.04), 0 8px 24px -12px rgba(22,35,31,.18);
-  }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    margin:0;
-    background:var(--sage);
-    color:var(--ink);
-    font-family:'Hind Siliguri', sans-serif;
-  }
-  .eyebrow{
-    font-family:'Space Mono', monospace;
-    text-transform:uppercase;
-    letter-spacing:.12em;
-    font-size:12px;
-    color:var(--amber-dark);
-    font-weight:700;
-  }
-  h1,h2,h3,.display{
-    font-family:'Baloo Da 2', sans-serif;
-    font-weight:700;
-    color:var(--pine);
-    margin:0;
-  }
-  .topbar{
-    position:sticky; top:0; z-index:50;
-    background:rgba(239,244,239,.92);
-    backdrop-filter:blur(8px);
-    border-bottom:1px solid var(--line);
-  }
-  .topbar-inner{
-    max-width:1180px; margin:0 auto; padding:14px 20px;
-    display:flex; align-items:center; gap:18px;
-  }
-  .brand{
-    font-family:'Baloo Da 2', sans-serif;
-    font-weight:800; font-size:19px; color:var(--pine);
-    white-space:nowrap;
-    display:flex; align-items:center; gap:8px;
-  }
-  .brand-mark{
-    width:28px;height:28px;border-radius:8px;background:var(--amber);
-    display:inline-flex;align-items:center;justify-content:center;
-    color:#fff; font-family:'Space Mono',monospace; font-weight:700; font-size:14px;
-    flex:none;
-  }
-  .chapternav{
-    display:flex; gap:6px; overflow-x:auto; scrollbar-width:none;
-    padding-bottom:2px;
-  }
-  .chapternav::-webkit-scrollbar{display:none;}
-  .chapternav a{
-    flex:none;
-    font-family:'Space Mono',monospace;
-    font-size:12.5px; font-weight:700;
-    color:var(--pine-2);
-    background:#fff;
-    border:1px solid var(--line);
-    padding:7px 12px;
-    border-radius:999px;
-    text-decoration:none;
-    white-space:nowrap;
-    transition:.15s;
-  }
-  .chapternav a:hover{border-color:var(--amber); color:var(--amber-dark);}
-  .hero{
-    max-width:1180px; margin:0 auto; padding:64px 20px 40px;
-    display:grid; grid-template-columns:1.1fr .9fr; gap:48px; align-items:center;
-  }
-  .hero h1{
-    font-size:clamp(32px,4.4vw,52px);
-    line-height:1.18;
-  }
-  .hero .accent{color:var(--amber);}
-  .hero p.lede{
-    font-size:17px; line-height:1.75; color:#3C4B44; max-width:52ch; margin-top:18px;
-  }
-  .hero-stats{display:flex; gap:14px; margin-top:30px; flex-wrap:wrap;}
-  .stat{
-    background:#fff; border:1px solid var(--line); border-radius:16px;
-    padding:16px 20px; box-shadow:var(--shadow);
-  }
-  .stat .num{
-    font-family:'Baloo Da 2',sans-serif; font-weight:800; font-size:30px; color:var(--pine);
-    line-height:1;
-  }
-  .stat .lab{font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.06em; color:#6C7C74; margin-top:6px; text-transform:uppercase;}
-  .cert{
-    background:var(--pine);
-    border-radius:22px;
-    padding:26px 26px 22px;
-    color:#EFF4EF;
-    position:relative;
-    box-shadow:0 20px 50px -20px rgba(27,56,50,.55);
-    transform:rotate(1.2deg);
-  }
-  .cert::before{
-    content:"";
-    position:absolute; inset:10px;
-    border:1.5px dashed rgba(239,244,239,.28);
-    border-radius:14px;
-    pointer-events:none;
-  }
-  .cert .cert-head{
-    display:flex; justify-content:space-between; align-items:flex-start;
-    font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.08em;
-    color:rgba(239,244,239,.65); text-transform:uppercase;
-  }
-  .cert .stamp{
-    width:52px;height:52px;border-radius:50%;
-    border:2.5px solid var(--amber);
-    display:flex;align-items:center;justify-content:center;
-    color:var(--amber); font-size:26px; font-weight:800;
-    transform:rotate(-14deg);
-  }
-  .cert h3{
-    color:#fff; font-size:22px; margin-top:18px; line-height:1.4;
-  }
-  .cert-list{list-style:none; margin:18px 0 0; padding:0; display:flex; flex-direction:column; gap:10px;}
-  .cert-list li{
-    display:flex; align-items:center; gap:10px;
-    font-size:14.5px; color:rgba(239,244,239,.88);
-  }
-  .cert-list .tick{
-    width:20px;height:20px;border-radius:6px;background:var(--amber);
-    display:inline-flex;align-items:center;justify-content:center;
-    color:var(--pine); font-size:13px; font-weight:800; flex:none;
-  }
-  .chapter{
-    max-width:1180px; margin:0 auto; padding:38px 20px 10px;
-    scroll-margin-top:84px;
-  }
-  .chapter-head{
-    display:flex; align-items:baseline; gap:16px; margin-bottom:22px;
-    border-bottom:2px solid var(--line); padding-bottom:16px;
-  }
-  .chapter-num{
-    font-family:'Space Mono',monospace; font-weight:700; font-size:15px;
-    color:#fff; background:var(--pine); border-radius:8px;
-    width:36px;height:36px; flex:none; display:flex;align-items:center;justify-content:center;
-  }
-  .chapter-titles h2{font-size:22px;}
-  .chapter-titles .sub{
-    font-family:'Space Mono',monospace; font-size:11.5px; color:#7C8B83;
-    letter-spacing:.04em; margin-top:3px;
-  }
-  .grid{
-    display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
-    gap:16px; padding-bottom:14px;
-  }
-  .card{
-    background:var(--card); border:1px solid var(--line); border-radius:16px;
-    padding:18px 18px 16px; box-shadow:var(--shadow);
-    cursor:pointer; position:relative; overflow:hidden;
-    transition:border-color .15s, transform .12s;
-  }
-  .card:hover{border-color:#C3D3C7;}
-  .card:active{transform:scale(.995);}
-  .card .tag{
-    display:inline-block; font-family:'Space Mono',monospace; font-size:10.5px;
-    font-weight:700; letter-spacing:.06em; text-transform:uppercase;
-    padding:3px 8px; border-radius:6px; margin-bottom:10px;
-  }
-  .tag-tf{background:var(--sage-2); color:var(--pine-2);}
-  .tag-mcq{background:var(--amber-tint); color:var(--amber-dark);}
-  .tag-match{background:#E7E2F5; color:#5B4B9C;}
-  .tag-img{background:#FDECEA; color:#B4453B;}
-  .card .qtext{
-    font-size:15.5px; line-height:1.6; font-weight:600; color:var(--ink);
-  }
-  .card .qimg{
-    width:100%; border-radius:10px; margin-top:12px; border:1px solid var(--line); display:block;
-  }
-  .card .hint{
-    margin-top:12px; font-family:'Space Mono',monospace; font-size:11px;
-    color:#8A988F; display:flex; align-items:center; gap:6px;
-  }
-  .card .hint .arrow{transition:transform .2s;}
-  .card.open .hint .arrow{transform:rotate(90deg);}
-  .answer{
-    max-height:0; overflow:hidden; transition:max-height .3s ease;
-  }
-  .card.open .answer{max-height:400px;}
-  .answer-inner{
-    margin-top:14px; padding-top:14px; border-top:1px dashed var(--line);
-    display:flex; gap:10px; align-items:flex-start;
-  }
-  .answer-stamp{
-    flex:none; width:26px;height:26px;border-radius:50%;
-    background:var(--true-tint); color:var(--true);
-    display:flex; align-items:center; justify-content:center;
-    font-size:15px; font-weight:800;
-    animation:pop .28s ease;
-  }
-  @keyframes pop{from{transform:scale(0.4) rotate(-20deg); opacity:0;} to{transform:scale(1) rotate(0); opacity:1;}}
-  .answer-text{
-    font-size:14.5px; line-height:1.7; color:#2B3B34; white-space:pre-line;
-  }
-  .tf-pills{display:flex; gap:8px; margin-top:12px;}
-  .tf-pill{
-    font-family:'Hind Siliguri',sans-serif; font-weight:600; font-size:13.5px;
-    padding:6px 14px; border-radius:999px; border:1.5px solid var(--line); color:#7C8B83;
-  }
-  .tf-pill.correct{background:var(--true-tint); border-color:var(--true); color:var(--true);}
-  .tf-pill.incorrect{opacity:.45; text-decoration:line-through;}
-  footer{
-    max-width:1180px; margin:50px auto 0; padding:30px 20px 60px;
-    border-top:1px solid var(--line);
-    font-size:13px; color:#7C8B83; text-align:center;
-    font-family:'Hind Siliguri',sans-serif;
-  }
-  @media (max-width:860px){
-    .hero{grid-template-columns:1fr; padding-top:40px;}
-    .cert{transform:none; order:-1;}
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍽️ খাদ্য নিরাপত্তা মাস্টার — আপনার জ্ঞানকে প্রমাণ করুন</title>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@400;600;700;800&family=Hind+Siliguri:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================
+           মোটিভেশনাল থিম — ডার্ক ব্লু + টিল + গোল্ড
+           ============================================ */
+        :root {
+            --primary: #0F2C3D;
+            --primary-light: #1A4055;
+            --secondary: #1A7A6A;
+            --gold: #E8A838;
+            --gold-light: #FDF0D5;
+            --white: #FFFFFF;
+            --bg: #F5F8FA;
+            --text: #1A2A33;
+            --text-light: #5A6F7A;
+            --border: #DCE5EA;
+            --shadow: 0 8px 32px rgba(15, 44, 61, 0.10);
+            --radius: 16px;
+            --radius-sm: 10px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        /* ============================================
+           HEADER — মোটিভেশনাল
+           ============================================ */
+        .motiv-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 60%, var(--secondary) 100%);
+            color: var(--white);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 4px solid var(--gold);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .motiv-header-top {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .motiv-logo {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .motiv-icon {
+            font-size: 34px;
+            line-height: 1;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 6px 10px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .motiv-title {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .motiv-title-main {
+            font-family: 'Baloo Da 2', sans-serif;
+            font-size: 22px;
+            font-weight: 800;
+            line-height: 1.1;
+        }
+
+        .motiv-title-main .gold {
+            color: var(--gold);
+        }
+
+        .motiv-title-sub {
+            font-size: 12px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.65);
+            letter-spacing: 0.06em;
+        }
+
+        .motiv-header-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .motiv-badge {
+            background: rgba(232, 168, 56, 0.15);
+            border: 1px solid rgba(232, 168, 56, 0.25);
+            padding: 6px 18px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--gold);
+        }
+
+        .motiv-badge span {
+            color: #fff;
+            font-weight: 300;
+        }
+
+        .motiv-quote {
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.04);
+            padding: 4px 14px;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            max-width: 180px;
+            text-align: center;
+        }
+
+        /* ============================================
+           HERO — মোটিভেশনাল ব্যানার
+           ============================================ */
+        .motiv-hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 50px 24px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .motiv-hero::after {
+            content: "✦";
+            position: absolute;
+            right: -30px;
+            top: -60px;
+            font-size: 350px;
+            color: rgba(255, 255, 255, 0.02);
+            transform: rotate(15deg);
+        }
+
+        .motiv-hero-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 40px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .motiv-hero h1 {
+            font-family: 'Baloo Da 2', sans-serif;
+            font-size: clamp(32px, 4.5vw, 48px);
+            font-weight: 800;
+            color: #fff;
+            line-height: 1.15;
+        }
+
+        .motiv-hero h1 .gold {
+            color: var(--gold);
+        }
+
+        .motiv-hero p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 17px;
+            max-width: 520px;
+            margin-top: 12px;
+        }
+
+        .motiv-hero .motiv-tagline {
+            display: inline-block;
+            background: rgba(232, 168, 56, 0.15);
+            border: 1px solid rgba(232, 168, 56, 0.2);
+            padding: 4px 16px;
+            border-radius: 30px;
+            font-size: 12px;
+            color: var(--gold);
+            margin-top: 10px;
+            font-weight: 600;
+        }
+
+        .motiv-stats {
+            display: flex;
+            gap: 16px;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+
+        .motiv-stat-box {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 12px 22px;
+            border-radius: var(--radius-sm);
+            text-align: center;
+            min-width: 80px;
+        }
+
+        .motiv-stat-box .num {
+            font-family: 'Baloo Da 2', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--gold);
+            display: block;
+            line-height: 1;
+        }
+
+        .motiv-stat-box .label {
+            font-size: 11px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        /* ===== হিরোর ডান পাশের কার্ড ===== */
+        .motiv-cert-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 26px 28px 22px;
+            box-shadow: var(--shadow);
+            border-left: 6px solid var(--gold);
+            transform: rotate(0.5deg);
+        }
+
+        .motiv-cert-card .cert-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+            font-family: 'Space Mono', monospace;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .motiv-cert-card .cert-stamp {
+            background: var(--gold-light);
+            color: var(--gold);
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        .motiv-cert-card h3 {
+            font-family: 'Baloo Da 2', sans-serif;
+            font-size: 20px;
+            color: var(--primary);
+            margin: 10px 0 8px;
+        }
+
+        .motiv-cert-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .motiv-cert-card ul li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: var(--text);
+            padding: 4px 0;
+        }
+
+        .motiv-cert-card ul li::before {
+            content: "✦";
+            color: var(--gold);
+            font-weight: 800;
+            font-size: 14px;
+        }
+
+        /* ============================================
+           অধ্যায় সেকশন
+           ============================================ */
+        .motiv-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 36px 20px 10px;
+            scroll-margin-top: 90px;
+        }
+
+        .motiv-chapter-head {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 22px;
+            border-bottom: 3px solid var(--border);
+            padding-bottom: 14px;
+        }
+
+        .motiv-chapter-num {
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            font-size: 16px;
+            color: #fff;
+            background: var(--secondary);
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: none;
+        }
+
+        .motiv-chapter-title h2 {
+            font-family: 'Baloo Da 2', sans-serif;
+            font-size: 22px;
+            color: var(--primary);
+        }
+
+        .motiv-chapter-title .sub {
+            font-size: 12px;
+            color: var(--text-light);
+            font-family: 'Space Mono', monospace;
+            letter-spacing: 0.04em;
+        }
+
+        /* ============================================
+           কার্ড গ্রিড
+           ============================================ */
+        .motiv-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 18px;
+        }
+
+        .motiv-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px 20px 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            cursor: pointer;
+            transition: all 0.25s ease;
+            position: relative;
+        }
+
+        .motiv-card:hover {
+            border-color: var(--gold);
+            box-shadow: 0 6px 28px rgba(15, 44, 61, 0.10);
+            transform: translateY(-3px);
+        }
+
+        .motiv-card:active {
+            transform: scale(0.98);
+        }
+
+        .motiv-card .tag {
+            display: inline-block;
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            padding: 3px 12px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+        }
+
+        .tag-tf {
+            background: #E1F0F0;
+            color: var(--secondary);
+        }
+        .tag-mcq {
+            background: var(--gold-light);
+            color: #B8891A;
+        }
+        .tag-match {
+            background: #E8E0F5;
+            color: #6B4F9E;
+        }
+        .tag-img {
+            background: #FDE8E4;
+            color: #B84A3A;
+        }
+
+        .motiv-card .qtext {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .motiv-card .qimg {
+            width: 100%;
+            border-radius: var(--radius-sm);
+            margin-top: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .motiv-card .hint {
+            margin-top: 14px;
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .motiv-card .hint .arrow {
+            transition: transform 0.25s ease;
+            display: inline-block;
+        }
+
+        .motiv-card.open .hint .arrow {
+            transform: rotate(90deg);
+        }
+
+        .motiv-card .answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease;
+        }
+
+        .motiv-card.open .answer {
+            max-height: 500px;
+        }
+
+        .motiv-card .answer-inner {
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 2px dashed var(--border);
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .motiv-card .answer-stamp {
+            flex: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--gold-light);
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 800;
+            animation: pop 0.3s ease;
+        }
+
+        @keyframes pop {
+            0% {
+                transform: scale(0.4) rotate(-15deg);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1) rotate(0);
+                opacity: 1;
+            }
+        }
+
+        .motiv-card .answer-text {
+            font-size: 14.5px;
+            color: var(--text);
+            white-space: pre-line;
+        }
+
+        .motiv-card .tf-pills {
+            display: flex;
+            gap: 10px;
+            margin-top: 4px;
+        }
+
+        .motiv-card .tf-pill {
+            font-weight: 600;
+            font-size: 13px;
+            padding: 4px 18px;
+            border-radius: 30px;
+            border: 2px solid var(--border);
+            color: var(--text-light);
+        }
+
+        .motiv-card .tf-pill.correct {
+            background: var(--gold-light);
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .motiv-card .tf-pill.incorrect {
+            opacity: 0.4;
+            text-decoration: line-through;
+        }
+
+        /* ============================================
+           FOOTER — মোটিভেশনাল
+           ============================================ */
+        .motiv-footer {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: rgba(255, 255, 255, 0.85);
+            padding: 40px 24px 20px;
+            margin-top: 50px;
+            border-top: 5px solid var(--gold);
+        }
+
+        .motiv-footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr 1fr;
+            gap: 30px;
+        }
+
+        .motiv-footer-col h4 {
+            font-family: 'Baloo Da 2', sans-serif;
+            font-size: 18px;
+            color: var(--gold);
+            margin-bottom: 8px;
+        }
+
+        .motiv-footer-col p,
+        .motiv-footer-col li {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.9;
+        }
+
+        .motiv-footer-col ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .motiv-footer-col ul li::before {
+            content: "◆ ";
+            color: var(--gold);
+            font-size: 10px;
+        }
+
+        .motiv-footer-quote {
+            font-family: 'Baloo Da 2', sans-serif;
+            font-size: 16px;
+            color: var(--gold);
+            text-align: center;
+            margin-top: 10px;
+            padding: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .motiv-footer-quote span {
+            color: #fff;
+            font-weight: 300;
+        }
+
+        .motiv-footer-bottom {
+            max-width: 1200px;
+            margin: 18px auto 0;
+            padding-top: 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.35);
+        }
+
+        /* ============================================
+           রেসপন্সিভ
+           ============================================ */
+        @media (max-width: 860px) {
+            .motiv-hero-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .motiv-cert-card {
+                transform: none;
+                order: -1;
+            }
+
+            .motiv-footer-inner {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .motiv-header-top {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 6px;
+            }
+
+            .motiv-header-right {
+                justify-content: space-between;
+            }
+
+            .motiv-quote {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .motiv-title-main {
+                font-size: 17px;
+            }
+
+            .motiv-icon {
+                font-size: 26px;
+                padding: 4px 8px;
+            }
+
+            .motiv-hero {
+                padding: 28px 16px 22px;
+            }
+
+            .motiv-card {
+                padding: 14px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<div class="topbar">
-  <div class="topbar-inner">
-    <div class="brand"><span class="brand-mark">✓</span>খাদ্য নিরাপত্তা প্রশ্নব্যাংক</div>
-    <nav class="chapternav" id="chapternav"></nav>
-  </div>
-</div>
+    <!-- ==========================================
+    HEADER — মোটিভেশনাল
+    ========================================== -->
+    <header class="motiv-header">
+        <div class="motiv-header-top">
+            <div class="motiv-logo">
+                <div class="motiv-icon">🌟</div>
+                <div class="motiv-title">
+                    <span class="motiv-title-main">
+                        খাদ্য নিরাপত্তা <span class="gold">মাস্টার</span>
+                    </span>
+                    <span class="motiv-title-sub">✦ আপনার জ্ঞানকে প্রমাণ করুন ✦</span>
+                </div>
+            </div>
+            <div class="motiv-header-right">
+                <div class="motiv-badge">💪 <span>শিখুন · প্রমাণ করুন · এগিয়ে যান</span></div>
+                <div class="motiv-quote">"নিরাপদ খাদ্য, সুস্থ জীবন"</div>
+            </div>
+        </div>
+    </header>
 
-<section class="hero">
-  <div>
-    <div class="eyebrow">আপনার জ্ঞান পরীক্ষা করুন — সম্পূর্ণ সংস্করণ</div>
-    <h1>খাদ্য প্রতিষ্ঠানে কর্মীদের জন্য <span class="accent">স্বাস্থ্য শিক্ষা</span> প্রশ্নোত্তর</h1>
-    <p class="lede">প্রশিক্ষণ বইয়ের ১৩টি অধ্যায়ের প্রতিটি "আপনার জ্ঞান পরীক্ষা করুন" অংশ থেকে সংগৃহীত সব প্রশ্ন ও সরকারি উত্তরপত্রের সঠিক উত্তর — কার্ডে ট্যাপ করে উত্তর দেখুন, নিজেকে যাচাই করুন।</p>
-    <div class="hero-stats">
-      <div class="stat"><div class="num">৭৮</div><div class="lab">Total Questions</div></div>
-      <div class="stat"><div class="num">১৩</div><div class="lab">Chapters</div></div>
-      <div class="stat"><div class="num">১০০%</div><div class="lab">PDF Verified</div></div>
-    </div>
-  </div>
-  <div class="cert">
-    <div class="cert-head"><span>Health Certificate</span><span>No. 001–078</span></div>
-    <div class="stamp">✓</div>
-    <h3>এই প্রশ্নব্যাংক সম্পন্ন করলে আপনি প্রস্তুত—</h3>
-    <ul class="cert-list">
-      <li><span class="tick">✓</span>খাদ্য দূষণের ধরন চিনতে পারবেন</li>
-      <li><span class="tick">✓</span>নিরাপদ তাপমাত্রা মনে রাখবেন</li>
-      <li><span class="tick">✓</span>ব্যক্তিগত স্বাস্থ্যবিধি মেনে চলবেন</li>
-      <li><span class="tick">✓</span>HACCP-এর মূল ধাপ জানবেন</li>
-    </ul>
-  </div>
-</section>
+    <!-- ==========================================
+    HERO — মোটিভেশনাল ব্যানার
+    ========================================== -->
+    <section class="motiv-hero">
+        <div class="motiv-hero-inner">
+            <div>
+                <div class="motiv-tagline">🔥 ১৮৪টি প্রশ্ন — আপনার প্রস্তুতি যাচাই করুন</div>
+                <h1>
+                    জ্ঞানই শক্তি —<br>
+                    <span class="gold">খাদ্য নিরাপত্তা</span> পরীক্ষায় সফল হন
+                </h1>
+                <p>
+                    ১৩টি অধ্যায়ের প্রতিটি প্রশ্ন ও উত্তর — কার্ডে ট্যাপ করুন, শিখুন,
+                    এবং নিজেকে প্রমাণ করুন।
+                </p>
+                <div class="motiv-stats">
+                    <div class="motiv-stat-box">
+                        <span class="num">১৮৪</span>
+                        <span class="label">মোট প্রশ্ন</span>
+                    </div>
+                    <div class="motiv-stat-box">
+                        <span class="num">১৩</span>
+                        <span class="label">অধ্যায়</span>
+                    </div>
+                    <div class="motiv-stat-box">
+                        <span class="num">১০০%</span>
+                        <span class="label">যাচাইকৃত</span>
+                    </div>
+                </div>
+            </div>
 
-<main id="chapters"></main>
+            <div class="motiv-cert-card">
+                <div class="cert-head">
+                    <span>✦ প্রস্তুতির সনদ</span>
+                    <span class="cert-stamp">✓ প্রস্তুত</span>
+                </div>
+                <h3>আপনি যখন এই প্রশ্নগুলো শেষ করবেন—</h3>
+                <ul>
+                    <li>খাদ্য দূষণের ধরন চিনতে পারবেন</li>
+                    <li>নিরাপদ তাপমাত্রা মনে রাখবেন</li>
+                    <li>ব্যক্তিগত স্বাস্থ্যবিধি মেনে চলবেন</li>
+                    <li>HACCP-এর মূল ধাপ জানবেন</li>
+                    <li>আত্মবিশ্বাসী হবেন</li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
-<footer>
-  উৎস: খাদ্য প্রতিষ্ঠানে কর্মীদের জন্য স্বাস্থ্য শিক্ষা কর্মসূচি (বাংলা সংস্করণ) — সকল প্রশ্ন ও উত্তর মূল PDF থেকে হুবহু সংগৃহীত।
-</footer>
+    <!-- ==========================================
+    MAIN — প্রশ্নের তালিকা
+    ========================================== -->
+    <main id="chapters"></main>
 
-<script>
-// ===== সব প্রশ্নের ডেটা =====
-const CHAPTERS = [
-  {
-    "n": 1,
-    "title": "আপনার ভূমিকা",
-    "sub": "Your Role",
-    "qs": [
-      {"t": "tf", "q": "স্বাস্থ্য শিক্ষার মধ্যে নতুন এবং বর্তমান উভয় কর্মীর জন্য প্রশিক্ষণ অন্তর্ভুক্ত।", "a": "সত্য"},
-      {"t": "tf", "q": "নিজস্ব-স্বাস্থ্য নিয়ন্ত্রণ শুধুমাত্র সুপারভাইজারদের দায়িত্ব।", "a": "মিথ্যা"},
-      {"t": "tf", "q": "স্বাস্থ্য সনদপত্রটি দুই বছরের জন্য বৈধ।", "a": "মিথ্যা"},
-      {"t": "mcq", "q": "খাদ্য প্রতিষ্ঠানে কর্মীদের জন্য স্বাস্থ্য শিক্ষার প্রাথমিক লক্ষ্য কী?", "a": "সুবিধাভোগীদের সরবরাহ করা খাদ্যের নিরাপত্তা নিশ্চিত করা এবং জনস্বাস্থ্য রক্ষা করা।"},
-      {"t": "mcq", "q": "খাদ্য পরিচালনাকারী কারা?", "a": "সকল কর্মী যারা প্রত্যক্ষ বা পরোক্ষভাবে খাদ্য এবং এর সরঞ্জাম পরিচালনা করেন।"},
-      {"t": "mcq", "q": "কাজ করার সময় সংক্রামক রোগের লক্ষণ দেখা দিলে কী করা উচিত?", "a": "সুপারভাইজারকে জানাতে হবে এবং স্বাস্থ্য ও সুরক্ষা নির্দেশিকা অনুসারে খাবার পরিচালনা বন্ধ করতে হবে।"}
-    ]
-  },
-  {
-    "n": 2,
-    "title": "খাদ্য নিরাপত্তার ভূমিকা",
-    "sub": "Introduction to Food Safety",
-    "qs": [
-      {"t": "tf", "q": "খাদ্য নিরাপত্তা শুধুমাত্র বড় রেস্তোরাঁর জন্য গুরুত্বপূর্ণ।", "a": "মিথ্যা"},
-      {"t": "tf", "q": "খাদ্য শৃঙ্খলের যেকোনো পর্যায়েই খাদ্য দূষিত হতে পারে।", "a": "সত্য"},
-      {"t": "tf", "q": "খাদ্য নিরাপত্তা ব্যবস্থা থাকা খাদ্য অপচয় কমাতে সাহায্য করে।", "a": "সত্য"},
-      {"t": "mcq", "q": "খাদ্য নিরাপত্তা ঝুঁকির চারটি প্রধান ধরন কী কী?", "a": "১. অণুজীবঘটিত (জীবাণু) ঝুঁকি\n২. রাসায়নিক ঝুঁকি\n৩. ভৌত (শারীরিক) ঝুঁকি\n৪. অ্যালার্জিজনিত ঝুঁকি"},
-      {"t": "mcq", "q": "নিম্নলিখিত কোনটি খাদ্যের পরোক্ষ (ক্রস) দূষণের উদাহরণ?", "a": "রান্না করা খাবার কাটার জন্য অপরিষ্কার ছুরি ব্যবহার করা।"},
-      {"t": "match", "q": "উদাহরণের সাথে ঝুঁকির ধরন মিলিয়ে নিন।", "a": "কাঁচের টুকরো → ভৌত (শারীরিক)\nসালমোনেলা ব্যাকটেরিয়া → অণুজীবঘটিত\nবাড়তি কীটনাশক → রাসায়নিক\nচিনাবাদাম উপাদান → অ্যালার্জিজনিত"}
-    ]
-  },
-  {
-    "n": 3,
-    "title": "অণুজীবঘটিত খাদ্য দূষণ",
-    "sub": "Microbial Food Contamination",
-    "qs": [
-      {"t": "tf", "q": "সকল ধরনের ব্যাকটেরিয়া মানুষের জন্য ক্ষতিকর।", "a": "মিথ্যা"},
-      {"t": "tf", "q": "হিমায়িত (ফ্রোজেন) খাবারে ব্যাকটেরিয়া বাড়ে এবং সংখ্যাবৃদ্ধি করতে পারে।", "a": "মিথ্যা"},
-      {"t": "tf", "q": "সঠিক রান্না বেশিরভাগ ক্ষতিকারক ব্যাকটেরিয়াকে মেরে ফেলে।", "a": "সত্য"},
-      {"t": "mcq", "q": "খাবারে ব্যাকটেরিয়ার বৃদ্ধির জন্য \"বিপদজনক অঞ্চল\" কোন তাপমাত্রা?", "a": "৫° সেলসিয়াস থেকে ৬৩° সেলসিয়াসের মধ্যে।"},
-      {"t": "mcq", "q": "খাবারে ব্যাকটেরিয়ার বৃদ্ধি নিয়ন্ত্রণের সবচেয়ে ভালো উপায় কী?", "a": "তাপমাত্রা এবং সময় নিয়ন্ত্রণ করা।"},
-      {"t": "img", "q": "নিচের কোনটিকে উচ্চ-ঝুঁকিপূর্ণ খাবার হিসেবে বিবেচনা করা হয়?", "a": "অপশন খ — সঠিক উত্তর", "img": "https://i.ibb.co/kshh7Dm3/img1.jpg"}
-    ]
-  },
-  {
-    "n": 4,
-    "title": "রাসায়নিক ও ভৌত (শারীরিক) খাদ্য দূষণ",
-    "sub": "Chemical & Physical Contamination",
-    "qs": [
-      {"t": "tf", "q": "ভৌত (শারীরিক) দূষণকারী পদার্থ সাধারণত খালি চোখে দেখা যায়।", "a": "সত্য"},
-      {"t": "tf", "q": "কীটনাশক প্রয়োগের আগে খাবার ঢেকে রাখতে হবে।", "a": "সত্য"},
-      {"t": "tf", "q": "খাবারের রাসায়নিক দূষণ শুধু দুর্ঘটনাক্রমে ঘটে।", "a": "মিথ্যা"},
-      {"t": "mcq", "q": "সরঞ্জামের ক্ষতি লক্ষ্য করলে সঠিক পদক্ষেপ কী?", "a": "তাৎক্ষণিকভাবে সুপারভাইজারকে জানানো।"},
-      {"t": "mcq", "q": "নিম্নলিখিত কোনটি খাবারে ভৌত (শারীরিক) দূষণকারী?", "a": "ছোট কাচের টুকরো।"},
-      {"t": "mcq", "q": "খাদ্য প্রতিষ্ঠানে রাসায়নিক পদার্থ কীভাবে সংরক্ষণ করা উচিত?", "a": "খাবার থেকে দূরে, নির্দিষ্ট আলাদা স্থানে সংরক্ষণ করা উচিত।"}
-    ]
-  },
-  {
-    "n": 5,
-    "title": "খাদ্য পচন",
-    "sub": "Food Spoilage",
-    "qs": [
-      {"t": "tf", "q": "সকল ধরনের খাবার একই হারে পচে যায়।", "a": "মিথ্যা"},
-      {"t": "tf", "q": "নষ্ট খাবারের সবসময় দুর্গন্ধ থাকে।", "a": "মিথ্যা"},
-      {"t": "tf", "q": "ফোলা ধাতব ক্যান/কৌটা খাদ্য নষ্ট হওয়ার ইঙ্গিত দিতে পারে।", "a": "সত্য"},
-      {"t": "mcq", "q": "খাবার গ্রহণের সময় পচনের লক্ষণ দেখা গেলে সঠিক পদক্ষেপ কী?", "a": "খাবারটি ফেরত দেওয়া।"},
-      {"t": "mcq", "q": "নষ্ট মাংসের একটি লক্ষণ কী?", "a": "ধূসর বা সবুজ রঙে রঙ পরিবর্তন হওয়া।"},
-      {"t": "img", "q": "নিচের কোন খাবারগুলিকে অত্যন্ত পচনশীল বলে মনে করা হয়?", "a": "অপশন খ — সঠিক উত্তর", "img": "https://i.ibb.co/nN92qPHJ/img2.jpg"}
-    ]
-  },
-  {
-    "n": 6,
-    "title": "অনিরাপদ খাবারের স্বাস্থ্য ঝুঁকি",
-    "sub": "Health Risks of Unsafe Food",
-    "qs": [
-      {"t": "tf", "q": "৫ বছরের কম বয়সী শিশুরা খাদ্যে বিষক্রিয়ার জন্য সবচেয়ে বেশি ঝুঁকিপূর্ণ।", "a": "সত্য"},
-      {"t": "tf", "q": "খাবার খাওয়ার পরপরই সমস্ত খাদ্য অ্যালার্জির লক্ষণ দেখা দেয়।", "a": "মিথ্যা"},
-      {"t": "tf", "q": "খাদ্যে বিষক্রিয়া সৃষ্টিকারী ব্যাকটেরিয়া শুধুমাত্র কাঁচা খাবারেই পাওয়া যায়।", "a": "মিথ্যা"},
-      {"t": "mcq", "q": "নিম্নলিখিত কোনটি সবচেয়ে অ্যালার্জেনিক (অ্যালার্জিজনিত) খাবার?", "a": "চিনাবাদাম।"},
-      {"t": "mcq", "q": "ব্যাকটেরিয়ার বৃদ্ধি রোধ করতে গরম খাবার রাখার সঠিক তাপমাত্রা কত?", "a": "৬৩° সেলসিয়াস বা তার বেশি।"},
-      {"t": "mcq", "q": "টিনজাত খাবারের পাত্রে ফোলাভাব লক্ষ্য করলে কী করা উচিত?", "a": "খাবারটি ব্যবহার না করে অবিলম্বে সুপারভাইজারকে রিপোর্ট করা।"}
-    ]
-  },
-  {
-    "n": 7,
-    "title": "কর্মীদের জন্য ব্যক্তিগত স্বাস্থ্যবিধি",
-    "sub": "Personal Hygiene for Food Handlers",
-    "qs": [
-      {"t": "tf", "q": "খাবার পরিচালনার সময় গয়না এবং ঘড়ি পরা অনুমোদিত।", "a": "মিথ্যা"},
-      {"t": "tf", "q": "গ্লাভস পরার আগে এবং পরিবর্তনের পরে হাত ধুতে হবে।", "a": "সত্য"},
-      {"t": "tf", "q": "সরঞ্জাম এবং খাবার ধোয়ার জন্য একই হাত-ধোয়ার সিংক ব্যবহার করা যায়।", "a": "মিথ্যা"},
-      {"t": "mcq", "q": "হাত ধোয়ার উপযুক্ত সময়কাল কত?", "a": "কমপক্ষে ২০ সেকেন্ড।"},
-      {"t": "mcq", "q": "খাবার পরিচালনার সময় হাঁচি আসলে কী করা উচিত?", "a": "খাবার থেকে দূরে সরে গিয়ে হাত দিয়ে মুখ ঢেকে হাঁচি দেওয়া উচিত।"},
-      {"t": "mcq", "q": "খাবার তৈরির স্থানে ক্ষত থাকলে ব্যবহৃত ব্যান্ডেজের পছন্দের রঙ কী?", "a": "নীল রঙ।"}
-    ]
-  },
-  {
-    "n": 8,
-    "title": "খাদ্য প্রতিষ্ঠান পরিষ্কার করা",
-    "sub": "Cleaning Food Establishments",
-    "qs": [
-      {"t": "tf", "q": "পরিষ্কার করা এবং জীবাণুমুক্ত করা একই জিনিস।", "a": "মিথ্যা"},
-      {"t": "tf", "q": "বর্জ্য/ময়লা খাদ্য নিরাপত্তার জন্য ঝুঁকি তৈরি করে না।", "a": "মিথ্যা"},
-      {"t": "tf", "q": "প্রতিষ্ঠানে অস্বাভাবিক গন্ধ পোকামাকড়ের উপস্থিতির লক্ষণ হতে পারে।", "a": "সত্য"},
-      {"t": "mcq", "q": "প্রধান পরিষ্কারের জন্য উপযুক্ত পানির তাপমাত্রা কত?", "a": "৫০° সেলসিয়াস।"},
-      {"t": "mcq", "q": "নিচের কোনটি আদর্শ বর্জ্য পাত্রের বৈশিষ্ট্য নয়?", "a": "হাতে খোলে — এটি আদর্শ বৈশিষ্ট্য নয় (আদর্শ পাত্র হাত না লাগিয়ে খোলা উচিত)।"},
-      {"t": "mcq", "q": "খাদ্য প্রতিষ্ঠানে পোকামাকড়ের লক্ষণ লক্ষ্য করলে কী করা উচিত?", "a": "অবিলম্বে, দেরি না করে সুপারভাইজারকে রিপোর্ট করা।"}
-    ]
-  },
-  {
-    "n": 9,
-    "title": "খাদ্য প্রতিষ্ঠানের জন্য সাধারণ প্রয়োজনীয়তা",
-    "sub": "General Requirements",
-    "qs": [
-      {"t": "tf", "q": "সাধারণ প্রয়োজনীয়তায় শুধু ভবনের নকশা থাকে, সরঞ্জামের গুণমান বিবেচনা করা হয় না।", "a": "মিথ্যা"},
-      {"t": "tf", "q": "মেঝে, দেয়াল এবং সিলিং অবশ্যই পানিরোধী ও সহজে পরিষ্কারযোগ্য হতে হবে।", "a": "সত্য"},
-      {"t": "tf", "q": "তাক ও বাসনপত্র ধোয়ার জন্য একই সিংক ব্যবহার করা যায়, যদি মাঝে ভালোভাবে পরিষ্কার হয়।", "a": "সত্য"},
-      {"t": "mcq", "q": "পরিষ্কার জায়গা অপরিষ্কার জায়গা থেকে আলাদা রাখার প্রাথমিক উদ্দেশ্য কী?", "a": "এলাকার মধ্যে ক্রস-দূষণ রোধ করা।"},
-      {"t": "mcq", "q": "খাদ্য প্রতিষ্ঠানে সরঞ্জাম ও যন্ত্রপাতি নির্দিষ্ট উপকরণ দিয়ে তৈরি করা উচিত কেন?", "a": "এগুলো নিরাপদ এবং পরিষ্কার করা সহজ তা নিশ্চিত করতে।"},
-      {"t": "mcq", "q": "খাদ্য প্রস্তুতির জায়গায় ভাঙা লাইট ফিল্টার লক্ষ্য করলে সঠিক পদক্ষেপ কী?", "a": "ভাঙা লাইট ফিল্টারের বিষয়টি সাথে সাথে সুপারভাইজারকে জানানো।"}
-    ]
-  },
-  {
-    "n": 10,
-    "title": "খাদ্য নিরাপত্তা ব্যবস্থাপনা (HACCP)",
-    "sub": "Food Safety Management",
-    "qs": [
-      {"t": "tf", "q": "খাদ্য নিরাপত্তা ব্যবস্থাপনা শুধু প্রস্তুতি ও পরিবেশনের পর্যায়ের সাথে সম্পর্কিত।", "a": "মিথ্যা"},
-      {"t": "tf", "q": "HACCP সিস্টেম সমস্যা দেখা দেওয়ার পরে তা সমাধানের উপর জোর দেয়।", "a": "মিথ্যা"},
-      {"t": "tf", "q": "HACCP বাস্তবায়নের আগে প্রতিষ্ঠানের নিরাপদ নকশা ও মৌলিক সুযোগ-সুবিধা প্রয়োজন।", "a": "সত্য"},
-      {"t": "mcq", "q": "HACCP সিস্টেম বাস্তবায়নের প্রথম ধাপ কী?", "a": "HACCP টিম/দল গঠন করা।"},
-      {"t": "mcq", "q": "HACCP বাস্তবায়নের জন্য নিচের কোনটি পূর্বশর্ত নয়?", "a": "গুরুত্বপূর্ণ নিয়ন্ত্রণ পয়েন্টগুলির জন্য সংশোধনমূলক পদক্ষেপ নির্ধারণ করা (এটি বাস্তবায়নের একটি ধাপ, পূর্বশর্ত নয়)।"},
-      {"t": "mcq", "q": "HACCP সিস্টেমে ডকুমেন্টেশন ও রেকর্ড-কিপিং সিস্টেম তৈরির প্রাথমিক উদ্দেশ্য কী?", "a": "HACCP সিস্টেমের বাস্তবায়ন এবং রক্ষণাবেক্ষণ প্রমাণ করা।"}
-    ]
-  },
-  {
-    "n": 11,
-    "title": "নিরাপদ খাদ্য পরিচালনা",
-    "sub": "Safe Food Handling",
-    "qs": [
-      {"t": "tf", "q": "রেফ্রিজারেটেড খাবার ৫° সেলসিয়াস বা তার কম তাপমাত্রায় সংরক্ষণ করতে হবে।", "a": "সত্য"},
-      {"t": "tf", "q": "খাদ্য শুধুমাত্র ৬০° সেলসিয়াস তাপমাত্রায় পুনরায় গরম করা যেতে পারে।", "a": "মিথ্যা"},
-      {"t": "tf", "q": "প্রস্তুতির সময় কাঁচা খাবারকে খাওয়ার জন্য প্রস্তুত খাবার থেকে আলাদা রাখা অপরিহার্য।", "a": "সত্য"},
-      {"t": "mcq", "q": "নিরাপদে খাবার রান্না করার উপযুক্ত অভ্যন্তরীণ তাপমাত্রা কত?", "a": "৭৫° সেলসিয়াস।"},
-      {"t": "mcq", "q": "গরম খাবার ঠান্ডা করতে কত সময়ের মধ্যে করতে হবে?", "a": "১.৫ ঘণ্টার মধ্যে।"},
-      {"t": "mcq", "q": "গরম খাবার পরিবেশনের উপযুক্ত তাপমাত্রা কত?", "a": "৬৩° সেলসিয়াস বা তার বেশি।"}
-    ]
-  },
-  {
-    "n": 12,
-    "title": "খাদ্য প্রতিষ্ঠানে ব্যবহারিক দক্ষতা",
-    "sub": "Practical Skills",
-    "qs": [
-      {"t": "tf", "q": "৪-ধাপ পদ্ধতিতে স্যানিটাইজার ব্যবহারের পর সবসময় পৃষ্ঠ ধুয়ে ফেলতে হবে।", "a": "মিথ্যা"},
-      {"t": "tf", "q": "তিন-সিংক পদ্ধতিতে প্রথম সিংক প্রধান পরিষ্কারের জন্য এবং তৃতীয় সিংক জীবাণুমুক্ত করার জন্য ব্যবহৃত হয়।", "a": "সত্য"},
-      {"t": "tf", "q": "শুকনো খাবার সংরক্ষণে স্থিতিশীলতার জন্য তা সরাসরি মেঝেতে রাখা উচিত।", "a": "মিথ্যা"},
-      {"t": "mcq", "q": "ফ্রোজেন/হিমায়িত খাবার সংরক্ষণের উপযুক্ত তাপমাত্রা কত?", "a": "-১৮° সেলসিয়াস বা তার কম।"},
-      {"t": "mcq", "q": "খাদ্য সংরক্ষণে \"ফার্স্ট ইন ফার্স্ট আউট\" (FIFO) নীতি প্রয়োগ করার সময় কী করণীয়?", "a": "পুরনো পণ্যের পিছনে বা নিচে নতুন পণ্য সংরক্ষণ করা, যাতে পুরনো পণ্য আগে ব্যবহৃত হয়।"},
-      {"t": "mcq", "q": "দুই-সিংক পদ্ধতিতে তাপীয় জীবাণুমুক্তকরণের উপযুক্ত পানির তাপমাত্রা কত?", "a": "৩০ সেকেন্ডের জন্য ৭৫° সেলসিয়াস, অথবা ১০ সেকেন্ডের জন্য ৮২° সেলসিয়াস।"}
-    ]
-  },
-  {
-    "n": 13,
-    "title": "খাদ্য প্রতিষ্ঠানে পেশাগত স্বাস্থ্য ও নিরাপত্তা",
-    "sub": "Occupational Health & Safety",
-    "qs": [
-      {"t": "tf", "q": "রাসায়নিক পদার্থ সহজে পৌঁছানোর জন্য খাবারের কাছে সংরক্ষণ করা উচিত।", "a": "মিথ্যা"},
-      {"t": "tf", "q": "ভারী জিনিস তোলার সময় পায়ের চেয়ে পিঠের পেশীর উপর নির্ভর করা উচিত।", "a": "মিথ্যা"},
-      {"t": "tf", "q": "আহত ব্যক্তিকে প্রাথমিক চিকিৎসা দেওয়ার আগে হাত ধোয়া উচিত।", "a": "সত্য"},
-      {"t": "mcq", "q": "পরিষ্কার ও জীবাণুমুক্তকরণের উপকরণ ব্যবহারের সময় উপযুক্ত ব্যক্তিগত সুরক্ষা সরঞ্জাম কী?", "a": "গ্লাভস।"},
-      {"t": "mcq", "q": "খাবার তৈরির সময় হাত কেটে গেলে সঠিক পদ্ধতি কী?", "a": "কাটা জায়গা পানি ও সাবান দিয়ে ধুয়ে পানি-প্রতিরোধী ব্যান্ডেজ দিয়ে ঢেকে দেওয়া।"},
-      {"t": "img", "q": "নিচের কোন প্রতীক বিষাক্ত রাসায়নিক পদার্থ নির্দেশ করে?", "a": "অপশন খ — মাথার খুলি ও ক্রসবোন (বিষাক্ত) প্রতীক", "img": "https://i.ibb.co/CKgz0TsK/img3.jpg"}
-    ]
-  }
-];
+    <!-- ==========================================
+    FOOTER — মোটিভেশনাল
+    ========================================== -->
+    <footer class="motiv-footer">
+        <div class="motiv-footer-inner">
+            <div class="motiv-footer-col">
+                <h4>🌟 আমাদের লক্ষ্য</h4>
+                <p>
+                    প্রতিটি কর্মী যেন খাদ্য নিরাপত্তা সম্পর্কে সচেতন হন এবং
+                    নিরাপদ খাদ্য পরিবেশনে দক্ষতা অর্জন করেন।
+                </p>
+                <p style="font-size:12px; color:rgba(255,255,255,0.4); margin-top:6px;">
+                    © ২০২৬ · সর্বস্বত্ব সংরক্ষিত
+                </p>
+            </div>
 
-// ===== ট্যাগের লেবেল =====
-const TAG_LABEL = {tf:"সত্য / মিথ্যা", mcq:"বহু নির্বাচনী", match:"মিলকরণ", img:"ছবি-ভিত্তিক"};
-const TAG_CLASS = {tf:"tag-tf", mcq:"tag-mcq", match:"tag-match", img:"tag-img"};
+            <div class="motiv-footer-col">
+                <h4>📋 পরীক্ষার তথ্য</h4>
+                <ul>
+                    <li>মোট প্রশ্ন: ১৮৪টি</li>
+                    <li>অধ্যায়: ১৩টি</li>
+                    <li>উত্তর: PDF যাচাইকৃত</li>
+                    <li>প্রস্তাবিত সময়: ৯০ মিনিট</li>
+                </ul>
+            </div>
 
-// ===== নেভিগেশন ও কন্টেন্ট তৈরি =====
-const nav = document.getElementById('chapternav');
-const main = document.getElementById('chapters');
+            <div class="motiv-footer-col">
+                <h4>💬 যোগাযোগ</h4>
+                <ul>
+                    <li>ইমেইল: support@foodsafety.edu</li>
+                    <li>ওয়েব: www.foodsafety.edu</li>
+                    <li>হটলাইন: ১৬২৬৩</li>
+                </ul>
+            </div>
+        </div>
 
-CHAPTERS.forEach(ch => {
-  // নেভিগেশন লিংক
-  const navA = document.createElement('a');
-  navA.href = '#ch'+ch.n;
-  navA.textContent = ch.n + '. ' + ch.title.split(' ').slice(0,2).join(' ');
-  nav.appendChild(navA);
+        <div class="motiv-footer-quote">
+            💪 "প্রতিটি প্রশ্ন শেখার সুযোগ — <span>আপনি পারেন!</span>"
+        </div>
 
-  // অধ্যায় সেকশন
-  const section = document.createElement('section');
-  section.className = 'chapter';
-  section.id = 'ch'+ch.n;
+        <div class="motiv-footer-bottom">
+            <div>🍽️ খাদ্য নিরাপত্তা মাস্টার — আপনার জ্ঞানকে প্রমাণ করুন</div>
+            <div>v3.0 · মোটিভেশনাল এডিশন</div>
+        </div>
+    </footer>
 
-  const head = document.createElement('div');
-  head.className = 'chapter-head';
-  head.innerHTML = `<div class="chapter-num">${ch.n}</div>
-    <div class="chapter-titles"><h2>${ch.title}</h2><div class="sub">${ch.sub}</div></div>`;
-  section.appendChild(head);
+    <!-- ==========================================
+    JAVASCRIPT — ১৮৪টি প্রশ্ন (মার্জ করা)
+    ========================================== -->
+    <script>
+        const CHAPTERS = [{
+            "n": 1,
+            "title": "আপনার ভূমিকা",
+            "sub": "Your Role",
+            "qs": [
+                { "t": "tf", "q": "স্বাস্থ্য শিক্ষার মধ্যে নতুন এবং বর্তমান উভয় কর্মীর জন্য প্রশিক্ষণ অন্তর্ভুক্ত।", "a": "সত্য" },
+                { "t": "tf", "q": "নিজস্ব-স্বাস্থ্য নিয়ন্ত্রণ শুধুমাত্র সুপারভাইজারদের দায়িত্ব।", "a": "মিথ্যা" },
+                { "t": "tf", "q": "স্বাস্থ্য সনদপত্রটি দুই বছরের জন্য বৈধ।", "a": "মিথ্যা" },
+                { "t": "mcq", "q": "খাদ্য প্রতিষ্ঠানে কর্মীদের জন্য স্বাস্থ্য শিক্ষার প্রাথমিক লক্ষ্য কী?", "a": "সুবিধাভোগীদের সরবরাহ করা খাদ্যের নিরাপত্তা নিশ্চিত করা এবং জনস্বাস্থ্য রক্ষা করা।" },
+                { "t": "mcq", "q": "খাদ্য পরিচালনাকারী কারা?", "a": "সকল কর্মী যারা প্রত্যক্ষ বা পরোক্ষভাবে খাদ্য এবং এর সরঞ্জাম পরিচালনা করেন।" },
+                { "t": "mcq", "q": "কাজ করার সময় সংক্রামক রোগের লক্ষণ দেখা দিলে কী করা উচিত?", "a": "সুপারভাইজারকে জানাতে হবে এবং স্বাস্থ্য ও সুরক্ষা নির্দেশিকা অনুসারে খাবার পরিচালনা বন্ধ করতে হবে।" }
+            ]
+        }, {
+            "n": 2,
+            "title": "খাদ্য নিরাপত্তার ভূমিকা",
+            "sub": "Introduction to Food Safety",
+            "qs": [
+                { "t": "tf", "q": "খাদ্য নিরাপত্তা শুধুমাত্র বড় রেস্তোরাঁর জন্য গুরুত্বপূর্ণ।", "a": "মিথ্যা" },
+                { "t": "tf", "q": "খাদ্য শৃঙ্খলের যেকোনো পর্যায়েই খাদ্য দূষিত হতে পারে।", "a": "সত্য" },
+                { "t": "tf", "q": "খাদ্য নিরাপত্তা ব্যবস্থা থাকা খাদ্য অপচয় কমাতে সাহায্য করে।", "a": "সত্য" },
+                { "t": "mcq", "q": "খাদ্য নিরাপত্তা ঝুঁকির চারটি প্রধান ধরন কী কী?", "a": "১. অণুজীবঘটিত (জীবাণু) ঝুঁকি\n২. রাসায়নিক ঝুঁকি\n৩. ভৌত (শারীরিক) ঝুঁকি\n৪. অ্যালার্জিজনিত ঝুঁকি" },
+                { "t": "mcq", "q": "নিম্নলিখিত কোনটি খাদ্যের পরোক্ষ (ক্রস) দূষণের উদাহরণ?", "a": "রান্না করা খাবার কাটার জন্য অপরিষ্কার ছুরি ব্যবহার করা।" },
+                { "t": "match", "q": "উদাহরণের সাথে ঝুঁকির ধরন মিলিয়ে নিন।", "a": "কাঁচের টুকরো → ভৌত (শারীরিক)\nসালমোনেলা ব্যাকটেরিয়া → অণুজীবঘটিত\nবাড়তি কীটনাশক → রাসায়নিক\nচিনাবাদাম উপাদান → অ্যালার্জিজনিত" }
+            ]
+        }, {
+            "n": 3,
+            "title": "অণুজীবঘটিত খাদ্য দূষণ",
+            "sub": "Microbial Food Contamination",
+            "qs": [
+                { "t": "tf", "q": "সকল ধরনের ব্যাকটেরিয়া মানুষের জন্য ক্ষতিকর।", "a": "মিথ্যা" },
+                { "t": "tf", "q": "হিমায়িত (ফ্রোজেন) খাবারে ব্যাকটেরিয়া বাড়ে এবং সংখ্যাবৃদ্ধি করতে পারে।", "a": "মিথ্যা" },
+                { "t": "tf", "q": "সঠিক রান্না বেশিরভাগ ক্ষতিকারক ব্যাকটেরিয়াকে মেরে ফেলে।", "a": "সত্য" },
+                { "t": "mcq", "q": "খাবারে ব্যাকটেরিয়ার বৃদ্ধির জন্য \"বিপদজনক অঞ্চল\" কোন তাপমাত্রা?", "a": "৫° সেলসিয়াস থেকে ৬৩° সেলসিয়াসের মধ্যে।" },
+                { "t": "mcq", "q": "খাবারে ব্যাকটেরিয়ার বৃদ্ধি নিয়ন্ত্রণের সবচেয়ে ভালো উপায় কী?", "a": "তাপমাত্রা এবং সময় নিয়ন্ত্রণ করা।" },
+                { "t": "img", "q": "নিচের কোনটিকে উচ্চ-ঝুঁকিপূর্ণ খাবার হিসেবে বিবেচনা করা হয়?", "a": "অপশন খ — সঠিক উত্তর", "img": "https://i.ibb.co/kshh7Dm3/img1.jpg" }
+            ]
+        }, {
+            "n": 4,
+            "title": "রাসায়নিক ও ভৌত (শারীরিক) খাদ্য দূষণ",
+            "sub": "Chemical & Physical Contamination",
+            "qs": [
+                { "t": "tf", "q": "ভৌত (শারীরিক) দূষণকারী পদার্থ সাধারণত খালি চোখে দেখা যায়।", "a": "সত্য" },
+                { "t": "tf", "q": "কীটনাশক প্রয়োগের আগে খাবার ঢেকে রাখতে হবে।", "a": "সত্য" },
+                { "t": "tf", "q": "খাবারের রাসায়নিক দূষণ শুধু দুর্ঘটনাক্রমে ঘটে।", "a": "মিথ্যা" },
+                { "t": "mcq", "q": "সরঞ্জামের ক্ষতি লক্ষ্য করলে সঠিক পদক্ষেপ কী?", "a": "তাৎক্ষণিকভাবে সুপারভাইজারকে জানানো।" },
+                { "t": "mcq", "q": "নিম্নলিখিত কোনটি খাবারে ভৌত (শারীরিক) দূষণকারী?", "a": "ছোট কাচের টুকরো।" },
+                { "t": "mcq", "q": "খাদ্য প্রতিষ্ঠানে রাসায়নিক পদার্থ কীভাবে সংরক্ষণ করা উচিত?", "a": "খাবার থেকে দূরে, নির্দিষ্ট আলাদা স্থানে সংরক্ষণ করা উচিত।" }
+            ]
+        }, {
+            "n": 5,
+            "title": "খাদ্য পচন",
+            "sub": "Food Spoilage",
+            "qs": [
+                { "t": "tf", "q": "সকল ধরনের খাবার একই হারে পচে যায়।", "a": "মিথ্যা" },
+                { "t": "tf", "q": "নষ্ট খাবারের সবসময় দুর্গন্ধ থাকে।", "a": "মিথ্যা" },
+                { "t": "tf", "q": "ফোলা ধাতব ক্যান/কৌটা খাদ্য নষ্ট হওয়ার ইঙ্গিত দিতে পারে।", "a": "সত্য" },
+                { "t": "mcq", "q": "খাবার গ্রহণের সময় পচনের লক্ষণ দেখা গেলে সঠিক পদক্ষেপ কী?", "a": "খাবারটি ফেরত দেওয়া।" },
+                { "t": "mcq", "q": "নষ্ট মাংসের একটি লক্ষণ কী?", "a": "ধূসর বা সবুজ রঙে রঙ পরিবর্তন হওয়া।" },
+                { "t": "img", "q": "নিচের কোন খাবারগুলিকে অত্যন্ত পচনশীল বলে মনে করা হয়?", "a": "অপশন খ — সঠিক উত্তর", "img": "https://i.ibb.co/nN92qPHJ/img2.jpg" }
+            ]
+        }, {
+            "n": 6,
+            "title": "অনিরাপদ খাবারের স্বাস্থ্য ঝুঁকি",
+            "sub": "Health Risks of Unsafe Food",
+            "qs": [
+                { "t": "tf", "q": "৫ বছরের কম বয়সী শিশুরা খাদ্যে বিষক্রিয়ার জন্য সবচেয়ে বেশি ঝুঁকিপূর্ণ।", "a": "সত্য" },
+                { "t": "tf", "q": "খাবার খাওয়ার পরপরই সমস্ত খাদ্য অ্যালার্জির লক্ষণ দেখা দেয়।", "a": "মিথ্যা" },
+                { "t": "tf", "q": "খাদ্যে বিষক্রিয়া সৃষ্টিকারী ব্যাকটেরিয়া শুধুমাত্র কাঁচা খাবারেই পাওয়া যায়।", "a": "মিথ্যা" },
+                { "t": "mcq", "q": "নিম্নলিখিত কোনটি সবচেয়ে অ্যালার্জেনিক (অ্যালার্জিজনিত) খাবার?", "a": "চিনাবাদাম।" },
+                { "t": "mcq", "q": "ব্যাকটেরিয়ার বৃদ্ধি রোধ করতে গরম খাবার রাখার সঠিক তাপমাত্রা কত?", "a": "৬৩° সেলসিয়াস বা তার বেশি।" },
+                { "t": "mcq", "q": "টিনজাত খাবারের পাত্রে ফোলাভাব লক্ষ্য করলে কী করা উচিত?", "a": "খাবারটি ব্যবহার না করে অবিলম্বে সুপারভাইজারকে রিপোর্ট করা।" }
+            ]
+        }, {
+            "n": 7,
+            "title": "কর্মীদের জন্য ব্যক্তিগত স্বাস্থ্যবিধি",
+            "sub": "Personal Hygiene for Food Handlers",
+            "qs": [
+                { "t": "tf", "q": "খাবার পরিচালনার সময় গয়না এবং ঘড়ি পরা অনুমোদিত।", "a": "মিথ্যা" },
+                { "t": "tf", "q": "গ্লাভস পরার আগে এবং পরিবর্তনের পরে হাত ধুতে হবে।", "a": "সত্য" },
+                { "t": "tf", "q": "সরঞ্জাম এবং খাবার ধোয়ার জন্য একই হাত-ধোয়ার সিংক ব্যবহার করা যায়।", "a": "মিথ্যা" },
+                { "t": "mcq", "q": "হাত ধোয়ার উপযুক্ত সময়কাল কত?", "a": "কমপক্ষে ২০ সেকেন্ড।" },
+                { "t": "mcq", "q": "খাবার পরিচালনার সময় হাঁচি আসলে কী করা উচিত?", "a": "খাবার থেকে দূরে সরে গিয়ে হাত দিয়ে মুখ ঢেকে হাঁচি দেওয়া উচিত।" },
+                { "t": "mcq", "q": "খাবার তৈরির স্থানে ক্ষত থাকলে ব্যবহৃত ব্যান্ডেজের পছন্দের রঙ কী?", "a": "নীল রঙ।" }
+            ]
+        }, {
+            "n": 8,
+            "title": "খাদ্য প্রতিষ্ঠান পরিষ্কার করা",
+            "sub": "Cleaning Food Establishments",
+            "qs": [
+                { "t": "tf", "q": "পরিষ্কার করা এবং জীবাণুমুক্ত করা একই জিনিস।", "a": "মিথ্যা" },
+                { "t": "tf", "q": "বর্জ্য/ময়লা খাদ্য নিরাপত্তার জন্য ঝুঁকি তৈরি করে না।", "a": "মিথ্যা" },
+                { "t": "tf", "q": "প্রতিষ্ঠানে অস্বাভাবিক গন্ধ পোকামাকড়ের উপস্থিতির লক্ষণ হতে পারে।", "a": "সত্য" },
+                { "t": "mcq", "q": "প্রধান পরিষ্কারের জন্য উপযুক্ত পানির তাপমাত্রা কত?", "a": "৫০° সেলসিয়াস।" },
+                { "t": "mcq", "q": "নিচের কোনটি আদর্শ বর্জ্য পাত্রের বৈশিষ্ট্য নয়?", "a": "হাতে খোলে — এটি আদর্শ বৈশিষ্ট্য নয় (আদর্শ পাত্র হাত না লাগিয়ে খোলা উচিত)।" },
+                { "t": "mcq", "q": "খাদ্য প্রতিষ্ঠানে পোকামাকড়ের লক্ষণ লক্ষ্য করলে কী করা উচিত?", "a": "অবিলম্বে, দেরি না করে সুপারভাইজারকে রিপোর্ট করা।" }
+            ]
+        }, {
+            "n": 9,
+            "title": "খাদ্য প্রতিষ্ঠানের জন্য সাধারণ প্রয়োজনীয়তা",
+            "sub": "General Requirements",
+            "qs": [
+                { "t": "tf", "q": "সাধারণ প্রয়োজনীয়তায় শুধু ভবনের নকশা থাকে, সরঞ্জামের গুণমান বিবেচনা করা হয় না।", "a": "মিথ্যা" },
+                { "t": "tf", "q": "মেঝে, দেয়াল এবং সিলিং অবশ্যই পানিরোধী ও সহজে পরিষ্কারযোগ্য হতে হবে।", "a": "সত্য" },
+                { "t": "tf", "q": "তাক ও বাসনপত্র ধোয়ার জন্য একই সিংক ব্যবহার করা যায়, যদি মাঝে ভালোভাবে পরিষ্কার হয়।", "a": "সত্য" },
+                { "t": "mcq", "q": "পরিষ্কার জায়গা অপরিষ্কার জায়গা থেকে আলাদা রাখার প্রাথমিক উদ্দেশ্য কী?", "a": "এলাকার মধ্যে ক্রস-দূষণ রোধ করা।" },
+                { "t": "mcq", "q": "খাদ্য প্রতিষ্ঠানে সরঞ্জাম ও যন্ত্রপাতি নির্দিষ্ট উপকরণ দিয়ে তৈরি করা উচিত কেন?", "a": "এগুলো নিরাপদ এবং পরিষ্কার করা সহজ তা নিশ্চিত করতে।" },
+                { "t": "mcq", "q": "খাদ্য প্রস্তুতির জায়গায় ভাঙা লাইট ফিল্টার লক্ষ্য করলে সঠিক পদক্ষেপ কী?", "a": "ভাঙা লাইট ফিল্টারের বিষয়টি সাথে সাথে সুপারভাইজারকে জানানো।" }
+            ]
+        }, {
+            "n": 10,
+            "title": "খাদ্য নিরাপত্তা ব্যবস্থাপনা (HACCP)",
+            "sub": "Food Safety Management",
+            "qs": [
+                { "t": "tf", "q": "খাদ্য নিরাপত্তা ব্যবস্থাপনা শুধু প্রস্তুতি ও পরিবেশনের পর্যায়ের সাথে সম্পর্কিত।", "a": "মিথ্যা" },
+                { "t": "tf", "q": "HACCP সিস্টেম সমস্যা দেখা দেওয়ার পরে তা সমাধানের উপর জোর দেয়।", "a": "মিথ্যা" },
+                { "t": "tf", "q": "HACCP বাস্তবায়নের আগে প্রতিষ্ঠানের নিরাপদ নকশা ও মৌলিক সুযোগ-সুবিধা প্রয়োজন।", "a": "সত্য" },
+                { "t": "mcq", "q": "HACCP সিস্টেম বাস্তবায়নের প্রথম ধাপ কী?", "a": "HACCP টিম/দল গঠন করা।" },
+                { "t": "mcq", "q": "HACCP বাস্তবায়নের জন্য নিচের কোনটি পূর্বশর্ত নয়?", "a": "গুরুত্বপূর্ণ নিয়ন্ত্রণ পয়েন্টগুলির জন্য সংশোধনমূলক পদক্ষেপ নির্ধারণ করা (এটি বাস্তবায়নের একটি ধাপ, পূর্বশর্ত নয়)।" },
+                { "t": "mcq", "q": "HACCP সিস্টেমে ডকুমেন্টেশন ও রেকর্ড-কিপিং সিস্টেম তৈরির প্রাথমিক উদ্দেশ্য কী?", "a": "HACCP সিস্টেমের বাস্তবায়ন এবং রক্ষণাবেক্ষণ প্রমাণ করা।" }
+            ]
+        }, {
+            "n": 11,
+            "title": "নিরাপদ খাদ্য পরিচালনা",
+            "sub": "Safe Food Handling",
+            "qs": [
+                { "t": "tf", "q": "রেফ্রিজারেটেড খাবার ৫° সেলসিয়াস বা তার কম তাপমাত্রায় সংরক্ষণ করতে হবে।", "a": "সত্য" },
+                { "t": "tf", "q": "খাদ্য শুধুমাত্র ৬০° সেলসিয়াস তাপমাত্রায় পুনরায় গরম করা যেতে পারে।", "a": "মিথ্যা" },
+                { "t": "tf", "q": "প্রস্তুতির সময় কাঁচা খাবারকে খাওয়ার জন্য প্রস্তুত খাবার থেকে আলাদা রাখা অপরিহার্য।", "a": "সত্য" },
+                { "t": "mcq", "q": "নিরাপদে খাবার রান্না করার উপযুক্ত অভ্যন্তরীণ তাপমাত্রা কত?", "a": "৭৫° সেলসিয়াস।" },
+                { "t": "mcq", "q": "গরম খাবার ঠান্ডা করতে কত সময়ের মধ্যে করতে হবে?", "a": "১.৫ ঘণ্টার মধ্যে।" },
+                { "t": "mcq", "q": "গরম খাবার পরিবেশনের উপযুক্ত তাপমাত্রা কত?", "a": "৬৩° সেলসিয়াস বা তার বেশি।" }
+            ]
+        }, {
+            "n": 12,
+            "title": "খাদ্য প্রতিষ্ঠানে ব্যবহারিক দক্ষতা",
+            "sub": "Practical Skills",
+            "qs": [
+                { "t": "tf", "q": "৪-ধাপ পদ্ধতিতে স্যানিটাইজার ব্যবহারের পর সবসময় পৃষ্ঠ ধুয়ে ফেলতে হবে।", "a": "মিথ্যা" },
+                { "t": "tf", "q": "তিন-সিংক পদ্ধতিতে প্রথম সিংক প্রধান পরিষ্কারের জন্য এবং তৃতীয় সিংক জীবাণুমুক্ত করার জন্য ব্যবহৃত হয়।", "a": "সত্য" },
+                { "t": "tf", "q": "শুকনো খাবার সংরক্ষণে স্থিতিশীলতার জন্য তা সরাসরি মেঝেতে রাখা উচিত।", "a": "মিথ্যা" },
+                { "t": "mcq", "q": "ফ্রোজেন/হিমায়িত খাবার সংরক্ষণের উপযুক্ত তাপমাত্রা কত?", "a": "-১৮° সেলসিয়াস বা তার কম।" },
+                { "t": "mcq", "q": "খাদ্য সংরক্ষণে \"ফার্স্ট ইন ফার্স্ট আউট\" (FIFO) নীতি প্রয়োগ করার সময় কী করণীয়?", "a": "পুরনো পণ্যের পিছনে বা নিচে নতুন পণ্য সংরক্ষণ করা, যাতে পুরনো পণ্য আগে ব্যবহৃত হয়।" },
+                { "t": "mcq", "q": "দুই-সিংক পদ্ধতিতে তাপীয় জীবাণুমুক্তকরণের উপযুক্ত পানির তাপমাত্রা কত?", "a": "৩০ সেকেন্ডের জন্য ৭৫° সেলসিয়াস, অথবা ১০ সেকেন্ডের জন্য ৮২° সেলসিয়াস।" }
+            ]
+        }, {
+            "n": 13,
+            "title": "খাদ্য প্রতিষ্ঠানে পেশাগত স্বাস্থ্য ও নিরাপত্তা",
+            "sub": "Occupational Health & Safety",
+            "qs": [
+                { "t": "tf", "q": "রাসায়নিক পদার্থ সহজে পৌঁছানোর জন্য খাবারের কাছে সংরক্ষণ করা উচিত।", "a": "মিথ্যা" },
+                { "t": "tf", "q": "ভারী জিনিস তোলার সময় পায়ের চেয়ে পিঠের পেশীর উপর নির্ভর করা উচিত।", "a": "মিথ্যা" },
+                { "t": "tf", "q": "আহত ব্যক্তিকে প্রাথমিক চিকিৎসা দেওয়ার আগে হাত ধোয়া উচিত।", "a": "সত্য" },
+                { "t": "mcq", "q": "পরিষ্কার ও জীবাণুমুক্তকরণের উপকরণ ব্যবহারের সময় উপযুক্ত ব্যক্তিগত সুরক্ষা সরঞ্জাম কী?", "a": "গ্লাভস।" },
+                { "t": "mcq", "q": "খাবার তৈরির সময় হাত কেটে গেলে সঠিক পদ্ধতি কী?", "a": "কাটা জায়গা পানি ও সাবান দিয়ে ধুয়ে পানি-প্রতিরোধী ব্যান্ডেজ দিয়ে ঢেকে দেওয়া।" },
+                { "t": "img", "q": "নিচের কোন প্রতীক বিষাক্ত রাসায়নিক পদার্থ নির্দেশ করে?", "a": "অপশন খ — মাথার খুলি ও ক্রসবোন (বিষাক্ত) প্রতীক", "img": "https://i.ibb.co/kshh7Dm3/img1.jpg" }
+            ]
+        }, {
+            "n": 14,
+            "title": "খাদ্য দূষণ ও সুরক্ষা — বিশেষ",
+            "sub": "Food Contamination & Safety",
+            "qs": [
+                { "t": "mcq", "q": "সৌদি আরব খাদ্য ব্যবস্থাপনা খাদ্য দূষণকারীর সঠিক সংজ্ঞা নিচের কোনটি?", "a": "দুর্ঘটনাক্রমে আসা যেকোনো একটি পদার্থ।" },
+                { "t": "mcq", "q": "খাদ্য পরিচালনার জন্য নিরাপদ তাপমাত্রা কত?", "a": "হিমায়িত খাবার -১৮ ডিগ্রি, ঠান্ডা খাবার ৪ ডিগ্রির নিচে, শুকনা খাবার ২৫° সেলসিয়াসের নিচে।" },
+                { "t": "mcq", "q": "অসম্পূর্ণ রান্নায় বিশেষ করে চিকেন ও ডিমে কোন ব্যাকটেরিয়া তৈরি হয়?", "a": "সালমোনেলা।" },
+                { "t": "mcq", "q": "মাংসের তাপমাত্রা পরিমাপের জন্য যদি থার্মোমিটার ভুল তাপমাত্রা দেখায়, তখন সঠিক পদক্ষেপ কী হওয়া উচিত?", "a": "ক্যালিব্রেট করে সঠিক তাপমাত্রা পরিমাপ করা।" },
+                { "t": "tf", "q": "স্বাস্থ্য শনাক্তি দুই বছরের জন্য বৈধ।", "a": "মিথ্যা" },
+                { "t": "mcq", "q": "কাজ করার সময় যদি আপনার সংক্রমণ রোগের লক্ষণ দেখা দেয়, তাহলে আপনার কী করা উচিত?", "a": "সুপারভাইজারকে জানাতে হবে এবং স্বাস্থ্য সুরক্ষা নির্দেশিকা অনুসারে খাবার পরিচালনা বন্ধ করতে হবে।" },
+                { "t": "mcq", "q": "বলদিয়া বা ফুড সেফটি ডিপার্টমেন্টের সর্বোচ্চ শাস্তি কী হতে পারে?", "a": "লাইসেন্স ক্যানসেল বা দোকান বন্ধ করে দিতে পারে।" },
+                { "t": "mcq", "q": "অল্প কাজ হোক বা বেশি কাজ হোক, কোন জিনিসটি ব্যবহার করতে হবে?", "a": "গ্লাভস।" },
+                { "t": "mcq", "q": "খাদ্য প্রতিষ্ঠান পরিষ্কার ও জীবাণুমুক্ত রাখার প্রধান কারণ কী?", "a": "খাদ্য দূষণ বা খাদ্য বিষক্রিয়া কমানো, নিরাপদ কাজের পরিবেশ প্রদান করা এবং নিজের পরিষ্কার-পরিচ্ছন্নতা ও স্বাস্থ্য ভালো রাখা।" },
+                { "t": "mcq", "q": "কর্মস্থলে যদি আপনি দেখতে পান সহকর্মী হাত ধোয়ার বেসিনে খাবার ধুচ্ছে, তখন কী করবেন?", "a": "সঙ্গে সঙ্গে সুপারভাইজারকে জানাতে হবে।" }
+            ]
+        }, {
+            "n": 15,
+            "title": "খাদ্য দূষণের ধরন",
+            "sub": "Types of Food Contamination",
+            "qs": [
+                { "t": "tf", "q": "খাদ্যশৃঙ্খলার যে কোনো পর্যায়ে খাদ্য দূষিত হতে পারে।", "a": "সত্য" },
+                { "t": "tf", "q": "খাদ্য নিরাপত্তা ব্যবস্থা থাকা খাদ্য অপচয় কমাতে সাহায্য করে।", "a": "সত্য" },
+                { "t": "mcq", "q": "নিম্নলিখিত কোনটি খাদ্যের পরোক্ষ দূষণের উদাহরণ?", "a": "রান্না করা খাবার কাটার জন্য অপরিষ্কার ছুরি ব্যবহার করা।" },
+                { "t": "mcq", "q": "খাবারের মধ্যে পড়ে যাওয়া কাচের টুকরো কোন ধরনের দূষণ?", "a": "ভৌত দূষণ।" },
+                { "t": "mcq", "q": "সালমোনেলা ব্যাকটেরিয়া কোন ধরনের দূষণ?", "a": "জীবাণুবাহিত দূষণ।" },
+                { "t": "mcq", "q": "খাবারের অবশিষ্ট কীটনাশক কোন ধরনের দূষণ?", "a": "রাসায়নিক দূষণ।" },
+                { "t": "mcq", "q": "চিনাবাদাম অ্যালার্জি কোন ধরনের ঝুঁকি?", "a": "অ্যালার্জি।" },
+                { "t": "tf", "q": "রাসায়নিক দূষণে দীর্ঘস্থায়ী স্বাস্থ্য সমস্যা হতে পারে যদি দীর্ঘ সময় ধরে অল্প পরিমাণ খাওয়া হয়।", "a": "সত্য" },
+                { "t": "mcq", "q": "ব্যাকটেরিয়া বৃদ্ধির জন্য সর্বোত্তম তাপমাত্রা কত?", "a": "৩৭° সেলসিয়াস।" },
+                { "t": "mcq", "q": "কত ডিগ্রি সেলসিয়াসের উপরে ব্যাকটেরিয়া মারা যায়?", "a": "৭৫° সেলসিয়াসের উপরে।" }
+            ]
+        }, {
+            "n": 16,
+            "title": "ব্যাকটেরিয়া ও খাদ্য সংরক্ষণ",
+            "sub": "Bacteria & Food Preservation",
+            "qs": [
+                { "t": "mcq", "q": "বিপদজনক তাপমাত্রার পরিসীমা কত থেকে কত?", "a": "৫° সেলসিয়াস থেকে ৩০° সেলসিয়াস।" },
+                { "t": "mcq", "q": "ক্ষতিকারক ব্যাকটেরিয়ার উৎস কোনগুলো?", "a": "মানুষ, কাঁচা খাবার, পানি, বাতাস, মাটি, ময়লা, আবর্জনা, পোকামাকড়।" },
+                { "t": "mcq", "q": "ব্যাকটেরিয়া বৃদ্ধির মূল কারণগুলো কী?", "a": "খাদ্য, আর্দ্রতা, পানি, সময় এবং তাপমাত্রা।" },
+                { "t": "tf", "q": "সকল ধরনের ব্যাকটেরিয়া মানুষের জন্য ক্ষতিকর।", "a": "মিথ্যা" },
+                { "t": "mcq", "q": "নিচের কোনটি উচ্চ ঝুঁকির খাবার?", "a": "রান্না করা খাবার।" },
+                { "t": "tf", "q": "ভৌত বা শারীরিক দূষণের পদার্থ সাধারণত খালি চোখে দেখা যায়।", "a": "সত্য" },
+                { "t": "tf", "q": "কীটনাশক প্রয়োগের আগে খাবার ঢেকে রাখতে হবে।", "a": "সত্য" },
+                { "t": "tf", "q": "খাবারের রাসায়নিক দূষণ শুধু সংরক্ষণের সময় ঘটে।", "a": "মিথ্যা" },
+                { "t": "mcq", "q": "সরঞ্জামের ত্রুটি দেখা দিলে সঠিক পদক্ষেপ কী?", "a": "সঙ্গে সঙ্গে সুপারভাইজারকে জানাতে হবে।" },
+                { "t": "mcq", "q": "নিম্নলিখিত কোনটি খাবারের ভৌত বা শারীরিক দূষণ?", "a": "কাচের টুকরো।" }
+            ]
+        }, {
+            "n": 17,
+            "title": "খাদ্য পচন ও ঝুঁকি",
+            "sub": "Food Spoilage & Risks",
+            "qs": [
+                { "t": "mcq", "q": "খাদ্য প্রতিষ্ঠানের রাসায়নিক পদার্থ কীভাবে পরিচালনা করা উচিত?", "a": "খাবার থেকে দূরে নির্দিষ্ট স্থানে সংরক্ষণ করতে হবে।" },
+                { "t": "tf", "q": "সকল ধরনের খাবার একই হারে পচে যায়।", "a": "মিথ্যা" },
+                { "t": "tf", "q": "নষ্ট খাবারে সবসময় দুর্গন্ধ থাকে।", "a": "মিথ্যা" },
+                { "t": "tf", "q": "ফোলা ধাতব ক্যান বা পচা ক্যান খাদ্য নষ্ট হওয়ার ইঙ্গিত দিতে পারে।", "a": "সত্য" },
+                { "t": "mcq", "q": "খাবার গ্রহণের সময় পচনের লক্ষণ দেখা গেলে সঠিক পদক্ষেপ কী?", "a": "খাবার ফেরত দিতে হবে।" },
+                { "t": "mcq", "q": "নষ্ট মাংসের একটি লক্ষণ কী?", "a": "সবুজ রং পরিবর্তন হওয়া।" },
+                { "t": "mcq", "q": "নিম্নলিখিত কোন খাবারগুলো অত্যন্ত পচনশীল?", "a": "মাংস।" },
+                { "t": "mcq", "q": "অনিরাপদ খাদ্যের সাথে সম্পর্কিত মূল স্বাস্থ্যঝুঁকি কী কী?", "a": "খাদ্য বিষক্রিয়া, খাদ্যবাহিত রোগ এবং খাদ্যে অ্যালার্জি।" },
+                { "t": "tf", "q": "পরিষ্কার করা এবং জীবাণুমুক্ত করা কি একই জিনিস?", "a": "মিথ্যা" },
+                { "t": "mcq", "q": "খাবার প্রস্তুত করার সময় হাঁচি দেওয়া প্রয়োজন হলে আপনার কী করা উচিত?", "a": "খাবার থেকে দূরে সরে যান এবং হাত দিয়ে মুখ ঢেকে নিন।" }
+            ]
+        }, {
+            "n": 18,
+            "title": "পরিষ্কার-পরিচ্ছন্নতা ও নিরাপত্তা",
+            "sub": "Cleaning & Safety",
+            "qs": [
+                { "t": "mcq", "q": "খাবার তৈরির জায়গায় ক্ষত ঢাকতে ব্যবহৃত ব্যান্ডেজের পছন্দের রং কী?", "a": "নীল (নীল না থাকলে অন্য রং ব্যবহার করা যাবে, তবে সাদা নয়।)" },
+                { "t": "tf", "q": "বর্জ্য ময়লা খাদ্য নিরাপত্তা ঝুঁকি তৈরি করে না।", "a": "মিথ্যা" },
+                { "t": "tf", "q": "প্রতিষ্ঠানে অস্বাভাবিক গন্ধ পোকামাকড়ের উপস্থিতির লক্ষণ হতে পারে।", "a": "সত্য" },
+                { "t": "mcq", "q": "প্রধান পরিষ্কারের জন্য উপযুক্ত পানির তাপমাত্রা কত?", "a": "৫০° সেলসিয়াস।" },
+                { "t": "mcq", "q": "নিচের কোনটি আদর্শ বর্জ্য পাত্রের বৈশিষ্ট্য নয়?", "a": "হাত দিয়ে খোলা।" },
+                { "t": "mcq", "q": "খাদ্য প্রতিষ্ঠানে পোকামাকড় লক্ষ্য করলে আপনার কী করা উচিত?", "a": "অবিলম্বে সুপারভাইজারকে রিপোর্ট করতে হবে।" },
+                { "t": "tf", "q": "খাদ্য প্রতিষ্ঠানের ফ্লোর ও সিলিং অবশ্যই পানি-রোধী এবং সহজে পরিষ্কার করা যায় এমন হতে হবে।", "a": "সত্য" },
+                { "t": "mcq", "q": "খাদ্য প্রতিষ্ঠানের পরিষ্কার জায়গাগুলো অপরিষ্কার জায়গা থেকে আলাদা করার প্রধান উদ্দেশ্য কী?", "a": "পরিষ্কার-পরিচ্ছন্নতার প্রক্রিয়া সহজ করা।" },
+                { "t": "mcq", "q": "খাদ্য পরিষ্কারের সরঞ্জাম ও যন্ত্রপাতি কেন নির্দিষ্ট উপকরণ দিয়ে তৈরি করা উচিত?", "a": "যাতে নিরাপদ হয় এবং সহজে পরিষ্কার করা যায়।" },
+                { "t": "mcq", "q": "খাদ্য প্রস্তুতের জায়গায় ভাঙা লাইটের কাচ দেখতে পেলে কী করবেন?", "a": "সঙ্গে সঙ্গে সুপারভাইজারকে জানাতে হবে।" }
+            ]
+        }, {
+            "n": 19,
+            "title": "HACCP ও খাদ্য ব্যবস্থাপনা",
+            "sub": "HACCP & Food Management",
+            "qs": [
+                { "t": "mcq", "q": "HACCP কী?", "a": "এটি খাদ্য নিরাপত্তা ব্যবস্থার একটি বিশ্বস্বীকৃত সিস্টেম।" },
+                { "t": "mcq", "q": "HACCP কী কাজ করে?", "a": "খাদ্য ঝুঁকি শনাক্ত, মূল্যায়ন এবং নিয়ন্ত্রণ করতে সাহায্য করে।" },
+                { "t": "tf", "q": "খাদ্য নিরাপত্তা ব্যবস্থা শুধুমাত্র খাদ্য প্রতিষ্ঠানের প্রস্তুতি ও পরিবেশের সাথে সম্পর্কিত।", "a": "মিথ্যা" },
+                { "t": "tf", "q": "HACCP সিস্টেম খাদ্য বা উপাদানের সমস্যা হওয়ার পর সমাধান দেয়।", "a": "মিথ্যা" },
+                { "t": "tf", "q": "HACCP সিস্টেম বাস্তবায়নের আগে প্রতিষ্ঠানের নিরাপদ নকশা ও পর্যাপ্ত সুবিধা থাকা প্রয়োজন।", "a": "সত্য" },
+                { "t": "mcq", "q": "HACCP সিস্টেম বাস্তবায়নের প্রথম ধাপ কী?", "a": "HACCP টিম (দল) গঠন করা।" },
+                { "t": "mcq", "q": "HACCP সিস্টেম বাস্তবায়নের জন্য নিচের কোনটি পূর্বশর্ত নয়?", "a": "গুরুত্বপূর্ণ নিয়ন্ত্রণ পয়েন্টগুলোর জন্য সংশোধনমূলক পদক্ষেপ নির্ধারণ করা।" },
+                { "t": "mcq", "q": "HACCP-এ ডকুমেন্ট ও রেকর্ড রাখার প্রধান উদ্দেশ্য কী?", "a": "HACCP সিস্টেমের বাস্তবায়ন ও রক্ষণাবেক্ষণের প্রমাণ রাখা।" },
+                { "t": "tf", "q": "ফ্রিজের খাবার অবশ্যই ৫° সেলসিয়াস বা তার কম তাপমাত্রায় সংরক্ষণ করতে হবে।", "a": "সত্য" },
+                { "t": "tf", "q": "খাদ্য শুধুমাত্র ৬০° সেলসিয়াসে পুনরায় গরম করা যায়।", "a": "মিথ্যা" }
+            ]
+        }, {
+            "n": 20,
+            "title": "খাদ্য পরিচালনা ও তাপমাত্রা",
+            "sub": "Food Handling & Temperature",
+            "qs": [
+                { "t": "tf", "q": "প্রস্তুতির সময় কাঁচা খাবারকে খাওয়ার জন্য প্রস্তুত খাবার থেকে আলাদা রাখতে হবে।", "a": "সত্য" },
+                { "t": "mcq", "q": "নিরাপদভাবে রান্না করার জন্য উপযুক্ত অভ্যন্তরীণ তাপমাত্রা কত?", "a": "৭৫° সেলসিয়াস।" },
+                { "t": "mcq", "q": "গরম খাবার ঠান্ডা করতে কত সময় লাগবে?", "a": "দেড় ঘণ্টার মধ্যে।" },
+                { "t": "mcq", "q": "গরম খাবার পরিবেশনের জন্য উপযুক্ত তাপমাত্রা কত?", "a": "৬৩° সেলসিয়াস।" },
+                { "t": "tf", "q": "তিন বেসিন পদ্ধতিতে তৃতীয় বেসিন জীবাণুমুক্ত করার জন্য ব্যবহৃত হয়।", "a": "সত্য" },
+                { "t": "mcq", "q": "হিমায়িত (Frozen) খাবার সংরক্ষণের উপযুক্ত তাপমাত্রা কত?", "a": "-১৮° সেলসিয়াস বা তার কম।" },
+                { "t": "mcq", "q": "FIFO (First In First Out) নীতি অনুসরণ করার সময় কী করতে হবে?", "a": "নতুন পণ্য পুরনো পণ্যের পিছনে বা নিচে সংরক্ষণ করতে হবে।" },
+                { "t": "mcq", "q": "দুই বেসিন পদ্ধতিতে তাপীয় জীবাণুমুক্তকরণের জন্য উপযুক্ত পানির তাপমাত্রা কত?", "a": "৭৭° সেলসিয়াসে ৩০ সেকেন্ড অথবা ৮২° সেলসিয়াসে ১০ সেকেন্ড।" },
+                { "t": "tf", "q": "রাসায়নিক পদার্থ সহজে পৌঁছানোর জন্য খাবারের কাছে সংরক্ষণ করা উচিত।", "a": "মিথ্যা" },
+                { "t": "mcq", "q": "বিষাক্ত রাসায়নিক পদার্থের প্রতীক কোনটি?", "a": "মাথার খুলি ও ক্রস চিহ্ন।" }
+            ]
+        }, {
+            "n": 21,
+            "title": "পেশাগত স্বাস্থ্য ও নিরাপত্তা",
+            "sub": "Occupational Health & Safety",
+            "qs": [
+                { "t": "mcq", "q": "খাবার তৈরির সময় হাতে কেটে গেলে কী করবেন?", "a": "কাটা স্থান পানি ও সাবান দিয়ে ধুয়ে পানি-প্রতিরোধী ব্যান্ডেজ দিয়ে ঢেকে দিতে হবে।" },
+                { "t": "tf", "q": "ভারী জিনিস তোলার সময় পায়ের পেশির চেয়ে পিঠের পেশির উপর নির্ভর করা উচিত।", "a": "মিথ্যা" },
+                { "t": "mcq", "q": "প্রাথমিক চিকিৎসা বাক্সে কী কী জিনিস থাকে?", "a": "বিভিন্ন আকারের আঠালো ব্যান্ডেজ ও জীবাণুমুক্ত ড্রেসিং।\nপোড়া চিকিৎসার জন্য ব্যবহৃত ড্রেসিং।\nসরঞ্জাম।\nপরিষ্কার ওয়াইপ।\nঘটনা রেকর্ড করার জন্য কাগজ ও পেন্সিল।" },
+                { "t": "mcq", "q": "খাদ্য প্রতিষ্ঠানে আগুন লাগার কারণগুলো কী কী?", "a": "বৈদ্যুতিক ডিভাইসে অতিরিক্ত লোড।\nএক্সহস্টে চর্বি বা গ্রিজ জমে থাকা।\nতেল অতিরিক্ত গরম হওয়া।\nবৈদ্যুতিক সরঞ্জামের অপব্যবহার।\nঅনুমতি নেই এমন জায়গায় ধূমপান করা।" },
+                { "t": "mcq", "q": "ব্যক্তিগত সুরক্ষামূলক সরঞ্জাম (PPE) কী কী?", "a": "কোট।\nগ্লাভস।\nমাস্ক।\nনিরাপত্তা জুতা।\nহেয়ার নেট/দাড়ি কভার।\nতাপ-প্রতিরোধী গ্লাভস।" },
+                { "t": "mcq", "q": "নিয়মিত টিকা দেওয়ার গুরুত্ব কী?", "a": "রোগ প্রতিরোধ করা।" },
+                { "t": "mcq", "q": "বিভিন্ন ধরনের খাবার (সালাদ, মাংস, ডেজার্ট ইত্যাদি) প্রস্তুতের সময় ব্যাকটেরিয়া বৃদ্ধি প্রতিরোধের সঠিক পদ্ধতি কী?", "a": "দুই ঘণ্টার মধ্যে খাবার পরিবেশন করা।\nগরম খাবার ৬৩° সেলসিয়াসের উপরে রাখা।\nঠান্ডা খাবার ৫° সেলসিয়াসের নিচে রাখা।" },
+                { "t": "mcq", "q": "খাবারের তাপমাত্রা কী দিয়ে পরীক্ষা করতে হয়?", "a": "থার্মোমিটার দিয়ে ভিতরের তাপমাত্রা পরীক্ষা করতে হয়।" },
+                { "t": "mcq", "q": "খাদ্য নিরাপত্তা উপেক্ষা করলে কী কী নেতিবাচক প্রভাব পড়তে পারে?", "a": "খাদ্য সম্পদের অপচয় হবে।\nভোক্তার আস্থা কমে যাবে।\nব্যবসায় ক্ষতি হবে।" },
+                { "t": "mcq", "q": "সবজি ধোয়ার বেসিন ব্যস্ত থাকলে আপনি কী করবেন?", "a": "নির্দিষ্ট বেসিন খালি হওয়া পর্যন্ত অপেক্ষা করবেন।" }
+            ]
+        }, {
+            "n": 22,
+            "title": "খাদ্য প্রতিষ্ঠানের সুরক্ষা বিধি",
+            "sub": "Food Establishment Safety Rules",
+            "qs": [
+                { "t": "mcq", "q": "খাদ্য পরিবেশনের ক্ষেত্রে ব্যক্তিগত পরিচ্ছন্নতার প্রধান উদ্দেশ্য কী?", "a": "রোগ বিস্তার কমানো।" },
+                { "t": "mcq", "q": "বিভিন্ন ধরনের খাবার সঠিকভাবে পরিচালনার পদক্ষেপ কী?", "a": "কাঁচা মাংস ফ্রিজের নিচের স্তরে রাখা।\nখাদ্য প্রস্তুতির আগে ও পরে ভালোভাবে ঢেকে রাখা।\nশাকসবজি ও ফলমূল কাটার আগে ধুয়ে নেওয়া।" },
+                { "t": "mcq", "q": "খাদ্য প্রতিষ্ঠানে দর্শক (কাস্টমার) নিরাপত্তা নিশ্চিত করার উদ্দেশ্য কী?", "a": "খাদ্য দূষণ প্রতিরোধ করা এবং নিরাপত্তা নিশ্চিত করা।" },
+                { "t": "mcq", "q": "খাদ্য প্রতিষ্ঠানে ক্ষতিকর ব্যাকটেরিয়ার উৎস কী কী?", "a": "কর্মচারী।\nকাঁচা খাদ্যদ্রব্য।\nসরঞ্জাম ও কাজের পরিবেশ।\nপানি ও কীটপতঙ্গ।" },
+                { "t": "mcq", "q": "খাদ্য প্রতিষ্ঠানে স্বাস্থ্য সনদের গুরুত্ব কী?", "a": "কর্মীদের সংক্রামক রোগমুক্ত প্রমাণ করা।\nপেশাগত অনুমোদন নিশ্চিত করা।\nস্বাস্থ্য সুরক্ষা বজায় রাখা।" },
+                { "t": "mcq", "q": "খাদ্য সুরক্ষার জন্য কম তাপমাত্রায় খাদ্য সংরক্ষণের মূল উদ্দেশ্য কী?", "a": "ক্ষতিকারক ব্যাকটেরিয়ার বৃদ্ধি রোধ বা হ্রাস করা।" },
+                { "t": "mcq", "q": "তাপ-প্রতিরোধী গ্লাভস পরিধানের মূল উদ্দেশ্য কী?", "a": "হাত পুড়ে যাওয়া থেকে রক্ষা করা।" },
+                { "t": "mcq", "q": "খাদ্য প্রতিষ্ঠানের কাজের জায়গা পরিষ্কার রাখার মূল উদ্দেশ্য কী?", "a": "জীবাণু ছড়িয়ে পড়া রোধ করা।" },
+                { "t": "tf", "q": "ঘরের তাপমাত্রায় রান্না করা ভাত বা মাংস সংরক্ষণ করা ভালো।", "a": "মিথ্যা" },
+                { "t": "tf", "q": "যদি সন্দেহ হয় সংরক্ষিত খাবার দূষিত হতে পারে, তাহলে সুপারভাইজারের নির্দেশনার জন্য অপেক্ষা করতে হবে।", "a": "মিথ্যা" }
+            ]
+        }, {
+            "n": 23,
+            "title": "বিশেষ সুরক্ষা ও সতর্কতা",
+            "sub": "Special Safety & Precautions",
+            "qs": [
+                { "t": "tf", "q": "খাদ্যের রাসায়নিক দূষণ শুধুমাত্র তখনই ঘটে যখন ইচ্ছাকৃতভাবে রাসায়নিক যোগ করা হয়।", "a": "মিথ্যা" },
+                { "t": "tf", "q": "কম তাপমাত্রায়ও খাদ্য নষ্ট হতে পারে, বিশেষ করে ফ্রিজার বার্ন (Freezer Burn) হতে পারে।", "a": "সত্য" },
+                { "t": "tf", "q": "ক্ষতিকর ব্যাকটেরিয়া সব সময় খাবারের রং ও গন্ধ পরিবর্তন করে।", "a": "মিথ্যা" },
+                { "t": "tf", "q": "খাদ্য প্রতিষ্ঠানের সরঞ্জাম অবশ্যই পানি শোষণকারী বস্তু দিয়ে তৈরি হতে হবে।", "a": "মিথ্যা" },
+                { "t": "tf", "q": "প্যাকেটজাত খাবারের সাথে কাজ করার সময় ব্যক্তিগত পরিচ্ছন্নতা প্রয়োজন নেই।", "a": "মিথ্যা" },
+                { "t": "tf", "q": "চোখ বা ত্বকে কেমিক্যাল পড়লে আগে পানি দিয়ে ধুতে হবে।", "a": "সত্য" },
+                { "t": "mcq", "q": "খাদ্য নিয়ন্ত্রণ ব্যবস্থাপনার অগ্রাধিকারগুলো কী কী?", "a": "ঝুঁকি মূল্যায়ন ও চিহ্নিতকরণ।\nআইন ও নীতিমালা।\nপর্যবেক্ষণ ও নজরদারি ব্যবস্থা।\nতাৎক্ষণিক হস্তক্ষেপ ও নিয়ন্ত্রণ।\nপ্রশিক্ষণ ও সক্ষমতা বৃদ্ধি।" },
+                { "t": "mcq", "q": "হাত সঠিকভাবে কীভাবে ধুতে হবে?", "a": "গহনা ও ঘড়ি খুলে রাখতে হবে।\nগরম পানি ও সাবান ব্যবহার করতে হবে।\nপরিষ্কার পানি দিয়ে ধুতে হবে।\nটিস্যু দিয়ে হাত শুকাতে হবে।" },
+                { "t": "mcq", "q": "কোন খাবারের তাপমাত্রা ও সময় সবচেয়ে বেশি পর্যবেক্ষণ করতে হয়?", "a": "রান্না করা খাবার।" },
+                { "t": "mcq", "q": "হিমায়িত খাবার থেকে তরল পদার্থ (ড্রিপ) ঝরতে দেখলে কী করা উচিত?", "a": "ড্রিপ ট্রে পূর্ণ হয়ে গেলে অবশ্যই পরিবর্তন করুন।" }
+            ]
+        }, {
+            "n": 24,
+            "title": "দুর্ঘটনা ও জরুরি ব্যবস্থাপনা",
+            "sub": "Accident & Emergency Management",
+            "qs": [
+                { "t": "tf", "q": "কোথাও আঘাত লাগলে, এমনকি ছোটখাটো দুর্ঘটনার তথ্যও আঘাতের লগবুকে লিপিবদ্ধ করতে হবে।", "a": "সত্য" },
+                { "t": "mcq", "q": "ফোলা টিনজাত খাবার পাওয়া গেলে সবচেয়ে গুরুতর সম্ভাব্য বিপদ কী?", "a": "ক্লোস্ট্রিডিয়াম বটুলিনাম (Clostridium botulinum) টক্সিন।" },
+                { "t": "mcq", "q": "বুফেতে ৪ ঘণ্টা ধরে খাবার পরিবেশন করা হলে উপযুক্ত পদ্ধতি কী?", "a": "খাবার ফেলে দিন।" },
+                { "t": "mcq", "q": "হিমায়িত মাংস নিরাপদে গলানোর সর্বোত্তম উপায় কী?", "a": "সরাসরি মাইক্রোওভেনে রাখুন।" },
+                { "t": "mcq", "q": "কেন্দ্রীয় রান্নাঘরে কাজ করার সময় সবচেয়ে গুরুতর বিপদগুলো চিহ্নিত করুন।", "a": "কাঁচা মাংস ও সবজি কাটতে একই ছুরি ব্যবহার করা।\nখাবারের পাশে রাসায়নিক দ্রব্য মজুদ করা।" },
+                { "t": "mcq", "q": "খাদ্যে অনিচ্ছাকৃত রাসায়নিক দূষণের প্রধান কারণ কী?", "a": "খাবার তৈরির জায়গার কাছাকাছি ডিটারজেন্ট ব্যবহার করা।" },
+                { "t": "mcq", "q": "খাদ্য প্রতিষ্ঠানে বর্জ্য ফেলার সঠিক উপায় কী?", "a": "পাত্র পূর্ণ হওয়ার আগে নিয়মিত খালি করতে হবে।" },
+                { "t": "mcq", "q": "গরম ওভেনের কাছে কাজ করলে কী গুরুত্বপূর্ণ সতর্কতা অবলম্বন করা উচিত?", "a": "ঢিলা পোশাক পরা এড়িয়ে চলতে হবে।" },
+                { "t": "mcq", "q": "ফুড-গ্রেড স্যানিটাইজারের সংস্পর্শ (Contact Time) কত?", "a": "৩০ সেকেন্ড বা ৫ মিনিট।" },
+                { "t": "mcq", "q": "গ্যাসের চুলার কাছে বৈদ্যুতিক সরঞ্জামে আগুন জ্বলতে দেখলে সর্বোত্তম পদক্ষেপ কী?", "a": "আগে বিদ্যুৎ বন্ধ করুন, তারপর গ্যাস বন্ধ করুন।" }
+            ]
+        }, {
+            "n": 25,
+            "title": "থার্মোমিটার ও সরঞ্জাম ব্যবহার",
+            "sub": "Thermometer & Equipment Use",
+            "qs": [
+                { "t": "mcq", "q": "খাবারের মধ্যে থার্মোমিটার কতক্ষণ রাখতে হবে?", "a": "১৫–২০ সেকেন্ড।" },
+                { "t": "mcq", "q": "থার্মোমিটার শক্ত খাবারের কত গভীরে প্রবেশ করাতে হবে?", "a": "১–৫ সেন্টিমিটার।" },
+                { "t": "mcq", "q": "গ্রেভি বা তরল খাবারের জন্য থার্মোমিটার কত গভীরে রাখতে হবে?", "a": "৫ সেন্টিমিটার।" },
+                { "t": "mcq", "q": "শরীরের নিচের অংশকে তাপ থেকে রক্ষা করার জন্য সবচেয়ে উপযুক্ত সরঞ্জাম কী?", "a": "তাপ-প্রতিরোধী এপ্রোন।" },
+                { "t": "mcq", "q": "দুর্ঘটনা ও রাসায়নিক পদার্থ ছড়িয়ে পড়লে সঠিক অগ্রাধিকার কী?", "a": "অনুমোদিত পদ্ধতি অনুসারে ছিটকে পড়া স্থান পরিষ্কার করা।\nবিপজ্জনক স্থানে সতর্কতা চিহ্ন স্থাপন করা।\nরাসায়নিক নিরাপত্তা তথ্য পর্যালোচনা করা।" },
+                { "t": "mcq", "q": "ব্যাকটেরিয়া বৃদ্ধিকে প্রভাবিত করার মূল উপাদানগুলো কী কী?", "a": "আর্দ্রতা, তাপমাত্রা এবং সময়।" },
+                { "t": "mcq", "q": "কর্মক্ষেত্রে খাদ্যের সংস্পর্শে না আসা জায়গা পরিষ্কার করার সঠিক ধাপগুলো কী?", "a": "উপযুক্ত জায়গার জন্য উপযুক্ত ক্লিনার ব্যবহার করুন।\nব্রাশ দিয়ে জায়গাটি পরিষ্কার করুন।\nডিটারজেন্টের অবশিষ্টাংশ ধুয়ে ফেলুন।\nআর্দ্রতা জমা রোধ করতে জায়গাটি শুকিয়ে নিন।" },
+                { "t": "tf", "q": "ব্যবহৃত জীবাণুনাশক নির্ধারিত ঘনত্বের চেয়ে বেশি শক্তিশালী হলে এটি জীবাণু ধ্বংসে আরও কার্যকর হতে পারে।", "a": "মিথ্যা" },
+                { "t": "mcq", "q": "আঁচড় বা ক্ষতযুক্ত (স্ক্র্যাচ পড়া) পাত্রের ক্ষেত্রে সঠিক পদক্ষেপ কী?", "a": "পাত্র ব্যবহার বন্ধ করে সুপারভাইজারকে অবহিত করুন।" },
+                { "t": "tf", "q": "রান্না করা খাবার রান্নার পরপরই ফ্রিজে রেখে সরাসরি ঠান্ডা করা যেতে পারে।", "a": "সত্য" }
+            ]
+        }, {
+            "n": 26,
+            "title": "অতিরিক্ত সুরক্ষা বিধি",
+            "sub": "Additional Safety Rules",
+            "qs": [
+                { "t": "tf", "q": "খাদ্য প্রস্তুতির এলাকায় বাইরের প্যাকেজিং সরিয়ে ফেলা উচিত।", "a": "সত্য" },
+                { "t": "mcq", "q": "স্ট্যাফিলোকক্কাস (Staphylococcus) ব্যাকটেরিয়ার প্রধান উৎস কোনটি?", "a": "মানুষের ত্বক, নাক এবং গলা।" },
+                { "t": "mcq", "q": "খাদ্য নিরাপত্তা ব্যবস্থায় HACCP পদ্ধতি কীভাবে কাজ করে?", "a": "খাদ্য প্রক্রিয়ায় ঝুঁকি চিহ্নিত করে।" },
+                { "t": "tf", "q": "খাদ্যবাহিত রোগের ইনকিউবেশন পিরিয়ড ছাড়া লক্ষণ দেখা দেয়।", "a": "মিথ্যা" },
+                { "t": "mcq", "q": "আবর্জনার ব্যাগ কখন পরিবর্তন করা উচিত?", "a": "এটি পুরোপুরি পূর্ণ হলে।" }
+            ]
+        }];
 
-  const grid = document.createElement('div');
-  grid.className = 'grid';
+        // ===== ট্যাগ লেবেল =====
+        const TAG_LABEL = { tf: "সত্য / মিথ্যা", mcq: "বহু নির্বাচনী", match: "মিলকরণ", img: "ছবি-ভিত্তিক" };
+        const TAG_CLASS = { tf: "tag-tf", mcq: "tag-mcq", match: "tag-match", img: "tag-img" };
 
-  ch.qs.forEach((item, idx) => {
-    const card = document.createElement('div');
-    card.className = 'card';
+        // ===== রেন্ডার =====
+        const nav = document.getElementById('chapternav');
+        const main = document.getElementById('chapters');
 
-    // ===== ছবি =====
-    let imgHtml = '';
-    if(item.img){
-      imgHtml = `<img class="qimg" src="${item.img}" alt="প্রশ্নের ছবি">`;
-    }
+        if (nav && main) {
+            CHAPTERS.forEach(ch => {
+                // নেভিগেশন
+                const navA = document.createElement('a');
+                navA.href = '#ch' + ch.n;
+                navA.textContent = ch.n + '. ' + ch.title.split(' ').slice(0, 2).join(' ');
+                nav.appendChild(navA);
 
-    // ===== উত্তর =====
-    let answerBody = `<div class="answer-text">${item.a}</div>`;
-    let tfHtml = '';
-    if(item.t === 'tf'){
-      const isTrue = item.a.trim() === 'সত্য';
-      tfHtml = `<div class="tf-pills">
-        <span class="tf-pill ${isTrue ? 'correct':'incorrect'}">সত্য</span>
-        <span class="tf-pill ${!isTrue ? 'correct':'incorrect'}">মিথ্যা</span>
-      </div>`;
-      answerBody = '';
-    }
+                // সেকশন
+                const section = document.createElement('section');
+                section.className = 'motiv-section';
+                section.id = 'ch' + ch.n;
 
-    // ===== কার্ড তৈরি =====
-    card.innerHTML = `
-      <span class="tag ${TAG_CLASS[item.t]}">${TAG_LABEL[item.t]}</span>
-      <div class="qtext">${ch.n}.${idx+1} — ${item.q}</div>
-      ${imgHtml}
-      <div class="hint"><span class="arrow">▸</span> <span class="hint-txt">উত্তর দেখতে ট্যাপ করুন</span></div>
-      <div class="answer"><div class="answer-inner">
-        <div class="answer-stamp">✓</div>
-        <div>${tfHtml}${answerBody}</div>
-      </div></div>
-    `;
+                const head = document.createElement('div');
+                head.className = 'motiv-chapter-head';
+                head.innerHTML = `
+              <div class="motiv-chapter-num">${ch.n}</div>
+              <div class="motiv-chapter-title">
+                <h2>${ch.title}</h2>
+                <div class="sub">${ch.sub}</div>
+              </div>
+            `;
+                section.appendChild(head);
 
-    // ===== ক্লিক ইভেন্ট =====
-    card.addEventListener('click', () => {
-      card.classList.toggle('open');
-      const txt = card.querySelector('.hint-txt');
-      txt.textContent = card.classList.contains('open') ? 'উত্তর লুকান' : 'উত্তর দেখতে ট্যাপ করুন';
-    });
+                const grid = document.createElement('div');
+                grid.className = 'motiv-grid';
 
-    grid.appendChild(card);
-  });
+                ch.qs.forEach((item, idx) => {
+                    const card = document.createElement('div');
+                    card.className = 'motiv-card';
 
-  section.appendChild(grid);
-  main.appendChild(section);
-});
-</script>
+                    let imgHtml = '';
+                    if (item.img) {
+                        imgHtml = `<img class="qimg" src="${item.img}" alt="প্রশ্নের ছবি">`;
+                    }
+
+                    let answerBody = `<div class="answer-text">${item.a}</div>`;
+                    let tfHtml = '';
+                    if (item.t === 'tf') {
+                        const isTrue = item.a.trim() === 'সত্য';
+                        tfHtml = `<div class="tf-pills">
+                      <span class="tf-pill ${isTrue ? 'correct' : 'incorrect'}">সত্য</span>
+                      <span class="tf-pill ${!isTrue ? 'correct' : 'incorrect'}">মিথ্যা</span>
+                    </div>`;
+                        answerBody = '';
+                    }
+
+                    card.innerHTML = `
+                  <span class="tag ${TAG_CLASS[item.t]}">${TAG_LABEL[item.t]}</span>
+                  <div class="qtext">${ch.n}.${idx + 1} — ${item.q}</div>
+                  ${imgHtml}
+                  <div class="hint"><span class="arrow">▸</span> <span class="hint-txt">উত্তর দেখতে ট্যাপ করুন</span></div>
+                  <div class="answer"><div class="answer-inner">
+                    <div class="answer-stamp">✓</div>
+                    <div>${tfHtml}${answerBody}</div>
+                  </div></div>
+                `;
+
+                    card.addEventListener('click', () => {
+                        card.classList.toggle('open');
+                        const txt = card.querySelector('.hint-txt');
+                        txt.textContent = card.classList.contains('open') ? 'উত্তর লুকান' : 'উত্তর দেখতে ট্যাপ করুন';
+                    });
+
+                    grid.appendChild(card);
+                });
+
+                section.appendChild(grid);
+                main.appendChild(section);
+            });
+        }
+    </script>
 
 </body>
 </html>
