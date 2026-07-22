@@ -6,9 +6,7 @@
     <title>🍽️ খাদ্য নিরাপত্তা মাস্টার — আপনার জ্ঞানকে প্রমাণ করুন</title>
     <link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@400;600;700;800&family=Hind+Siliguri:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* ============================================
-           মোটিভেশনাল থিম — ডার্ক ব্লু + টিল + গোল্ড
-           ============================================ */
+        /* ===== মোটিভেশনাল থিম ===== */
         :root {
             --primary: #0F2C3D;
             --primary-light: #1A4055;
@@ -25,12 +23,7 @@
             --radius-sm: 10px;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Hind Siliguri', sans-serif;
             background: var(--bg);
@@ -38,9 +31,7 @@
             line-height: 1.7;
         }
 
-        /* ============================================
-           HEADER — মোটিভেশনাল
-           ============================================ */
+        /* ===== HEADER ===== */
         .motiv-header {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 60%, var(--secondary) 100%);
             color: var(--white);
@@ -51,7 +42,6 @@
             border-bottom: 4px solid var(--gold);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
-
         .motiv-header-top {
             max-width: 1200px;
             margin: 0 auto;
@@ -62,89 +52,24 @@
             flex-wrap: wrap;
             gap: 12px;
         }
+        .motiv-logo { display: flex; align-items: center; gap: 14px; }
+        .motiv-icon { font-size: 34px; background: rgba(255,255,255,0.08); padding: 6px 10px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.08); }
+        .motiv-title { display: flex; flex-direction: column; }
+        .motiv-title-main { font-family: 'Baloo Da 2', sans-serif; font-size: 22px; font-weight: 800; line-height: 1.1; }
+        .motiv-title-main .gold { color: var(--gold); }
+        .motiv-title-sub { font-size: 12px; font-weight: 400; color: rgba(255,255,255,0.65); letter-spacing: 0.06em; }
+        .motiv-header-right { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+        .motiv-badge { background: rgba(232, 168, 56, 0.15); border: 1px solid rgba(232, 168, 56, 0.25); padding: 6px 18px; border-radius: 30px; font-size: 12px; font-weight: 600; color: var(--gold); }
+        .motiv-badge span { color: #fff; font-weight: 300; }
+        .motiv-quote { font-family: 'Space Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.04); padding: 4px 14px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05); }
 
-        .motiv-logo {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-
-        .motiv-icon {
-            font-size: 34px;
-            line-height: 1;
-            background: rgba(255, 255, 255, 0.08);
-            padding: 6px 10px;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .motiv-title {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .motiv-title-main {
-            font-family: 'Baloo Da 2', sans-serif;
-            font-size: 22px;
-            font-weight: 800;
-            line-height: 1.1;
-        }
-
-        .motiv-title-main .gold {
-            color: var(--gold);
-        }
-
-        .motiv-title-sub {
-            font-size: 12px;
-            font-weight: 400;
-            color: rgba(255, 255, 255, 0.65);
-            letter-spacing: 0.06em;
-        }
-
-        .motiv-header-right {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-
-        .motiv-badge {
-            background: rgba(232, 168, 56, 0.15);
-            border: 1px solid rgba(232, 168, 56, 0.25);
-            padding: 6px 18px;
-            border-radius: 30px;
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--gold);
-        }
-
-        .motiv-badge span {
-            color: #fff;
-            font-weight: 300;
-        }
-
-        .motiv-quote {
-            font-family: 'Space Mono', monospace;
-            font-size: 10px;
-            color: rgba(255, 255, 255, 0.4);
-            background: rgba(255, 255, 255, 0.04);
-            padding: 4px 14px;
-            border-radius: 6px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            max-width: 180px;
-            text-align: center;
-        }
-
-        /* ============================================
-           HERO — মোটিভেশনাল ব্যানার
-           ============================================ */
+        /* ===== HERO ===== */
         .motiv-hero {
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             padding: 50px 24px 40px;
             position: relative;
             overflow: hidden;
         }
-
         .motiv-hero::after {
             content: "✦";
             position: absolute;
@@ -154,7 +79,6 @@
             color: rgba(255, 255, 255, 0.02);
             transform: rotate(15deg);
         }
-
         .motiv-hero-inner {
             max-width: 1200px;
             margin: 0 auto;
@@ -165,7 +89,6 @@
             position: relative;
             z-index: 1;
         }
-
         .motiv-hero h1 {
             font-family: 'Baloo Da 2', sans-serif;
             font-size: clamp(32px, 4.5vw, 48px);
@@ -173,18 +96,8 @@
             color: #fff;
             line-height: 1.15;
         }
-
-        .motiv-hero h1 .gold {
-            color: var(--gold);
-        }
-
-        .motiv-hero p {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 17px;
-            max-width: 520px;
-            margin-top: 12px;
-        }
-
+        .motiv-hero h1 .gold { color: var(--gold); }
+        .motiv-hero p { color: rgba(255,255,255,0.8); font-size: 17px; max-width: 520px; margin-top: 12px; }
         .motiv-hero .motiv-tagline {
             display: inline-block;
             background: rgba(232, 168, 56, 0.15);
@@ -196,14 +109,7 @@
             margin-top: 10px;
             font-weight: 600;
         }
-
-        .motiv-stats {
-            display: flex;
-            gap: 16px;
-            margin-top: 24px;
-            flex-wrap: wrap;
-        }
-
+        .motiv-stats { display: flex; gap: 16px; margin-top: 24px; flex-wrap: wrap; }
         .motiv-stat-box {
             background: rgba(255, 255, 255, 0.06);
             backdrop-filter: blur(6px);
@@ -213,25 +119,10 @@
             text-align: center;
             min-width: 80px;
         }
+        .motiv-stat-box .num { font-family: 'Baloo Da 2', sans-serif; font-size: 28px; font-weight: 800; color: var(--gold); display: block; line-height: 1; }
+        .motiv-stat-box .label { font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 0.06em; }
 
-        .motiv-stat-box .num {
-            font-family: 'Baloo Da 2', sans-serif;
-            font-size: 28px;
-            font-weight: 800;
-            color: var(--gold);
-            display: block;
-            line-height: 1;
-        }
-
-        .motiv-stat-box .label {
-            font-size: 11px;
-            font-weight: 600;
-            color: rgba(255, 255, 255, 0.6);
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-        }
-
-        /* ===== হিরোর ডান পাশের কার্ড ===== */
+        /* ===== হিরোর কার্ড ===== */
         .motiv-cert-card {
             background: var(--white);
             border-radius: var(--radius);
@@ -240,65 +131,20 @@
             border-left: 6px solid var(--gold);
             transform: rotate(0.5deg);
         }
+        .motiv-cert-card .cert-head { display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-family: 'Space Mono', monospace; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.06em; }
+        .motiv-cert-card .cert-stamp { background: var(--gold-light); color: var(--gold); padding: 4px 14px; border-radius: 30px; font-weight: 700; font-size: 13px; }
+        .motiv-cert-card h3 { font-family: 'Baloo Da 2', sans-serif; font-size: 20px; color: var(--primary); margin: 10px 0 8px; }
+        .motiv-cert-card ul { list-style: none; padding: 0; }
+        .motiv-cert-card ul li { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--text); padding: 4px 0; }
+        .motiv-cert-card ul li::before { content: "✦"; color: var(--gold); font-weight: 800; font-size: 14px; }
 
-        .motiv-cert-card .cert-head {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 11px;
-            font-family: 'Space Mono', monospace;
-            color: var(--text-light);
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-        }
-
-        .motiv-cert-card .cert-stamp {
-            background: var(--gold-light);
-            color: var(--gold);
-            padding: 4px 14px;
-            border-radius: 30px;
-            font-weight: 700;
-            font-size: 13px;
-        }
-
-        .motiv-cert-card h3 {
-            font-family: 'Baloo Da 2', sans-serif;
-            font-size: 20px;
-            color: var(--primary);
-            margin: 10px 0 8px;
-        }
-
-        .motiv-cert-card ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .motiv-cert-card ul li {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 14px;
-            color: var(--text);
-            padding: 4px 0;
-        }
-
-        .motiv-cert-card ul li::before {
-            content: "✦";
-            color: var(--gold);
-            font-weight: 800;
-            font-size: 14px;
-        }
-
-        /* ============================================
-           অধ্যায় সেকশন
-           ============================================ */
+        /* ===== অধ্যায় ===== */
         .motiv-section {
             max-width: 1200px;
             margin: 0 auto;
             padding: 36px 20px 10px;
             scroll-margin-top: 90px;
         }
-
         .motiv-chapter-head {
             display: flex;
             align-items: center;
@@ -307,7 +153,6 @@
             border-bottom: 3px solid var(--border);
             padding-bottom: 14px;
         }
-
         .motiv-chapter-num {
             font-family: 'Space Mono', monospace;
             font-weight: 700;
@@ -322,29 +167,15 @@
             justify-content: center;
             flex: none;
         }
+        .motiv-chapter-title h2 { font-family: 'Baloo Da 2', sans-serif; font-size: 22px; color: var(--primary); }
+        .motiv-chapter-title .sub { font-size: 12px; color: var(--text-light); font-family: 'Space Mono', monospace; letter-spacing: 0.04em; }
 
-        .motiv-chapter-title h2 {
-            font-family: 'Baloo Da 2', sans-serif;
-            font-size: 22px;
-            color: var(--primary);
-        }
-
-        .motiv-chapter-title .sub {
-            font-size: 12px;
-            color: var(--text-light);
-            font-family: 'Space Mono', monospace;
-            letter-spacing: 0.04em;
-        }
-
-        /* ============================================
-           কার্ড গ্রিড
-           ============================================ */
+        /* ===== কার্ড ===== */
         .motiv-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 18px;
         }
-
         .motiv-card {
             background: var(--white);
             border: 1px solid var(--border);
@@ -353,19 +184,9 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
             cursor: pointer;
             transition: all 0.25s ease;
-            position: relative;
         }
-
-        .motiv-card:hover {
-            border-color: var(--gold);
-            box-shadow: 0 6px 28px rgba(15, 44, 61, 0.10);
-            transform: translateY(-3px);
-        }
-
-        .motiv-card:active {
-            transform: scale(0.98);
-        }
-
+        .motiv-card:hover { border-color: var(--gold); box-shadow: 0 6px 28px rgba(15, 44, 61, 0.10); transform: translateY(-3px); }
+        .motiv-card:active { transform: scale(0.98); }
         .motiv-card .tag {
             display: inline-block;
             font-family: 'Space Mono', monospace;
@@ -377,76 +198,19 @@
             border-radius: 20px;
             margin-bottom: 10px;
         }
+        .tag-tf { background: #E1F0F0; color: var(--secondary); }
+        .tag-mcq { background: var(--gold-light); color: #B8891A; }
+        .tag-match { background: #E8E0F5; color: #6B4F9E; }
+        .tag-img { background: #FDE8E4; color: #B84A3A; }
 
-        .tag-tf {
-            background: #E1F0F0;
-            color: var(--secondary);
-        }
-        .tag-mcq {
-            background: var(--gold-light);
-            color: #B8891A;
-        }
-        .tag-match {
-            background: #E8E0F5;
-            color: #6B4F9E;
-        }
-        .tag-img {
-            background: #FDE8E4;
-            color: #B84A3A;
-        }
-
-        .motiv-card .qtext {
-            font-size: 15px;
-            font-weight: 600;
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        .motiv-card .qimg {
-            width: 100%;
-            border-radius: var(--radius-sm);
-            margin-top: 12px;
-            border: 1px solid var(--border);
-        }
-
-        .motiv-card .hint {
-            margin-top: 14px;
-            font-family: 'Space Mono', monospace;
-            font-size: 11px;
-            color: var(--text-light);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .motiv-card .hint .arrow {
-            transition: transform 0.25s ease;
-            display: inline-block;
-        }
-
-        .motiv-card.open .hint .arrow {
-            transform: rotate(90deg);
-        }
-
-        .motiv-card .answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.35s ease;
-        }
-
-        .motiv-card.open .answer {
-            max-height: 500px;
-        }
-
-        .motiv-card .answer-inner {
-            margin-top: 14px;
-            padding-top: 14px;
-            border-top: 2px dashed var(--border);
-            display: flex;
-            gap: 12px;
-            align-items: flex-start;
-        }
-
+        .motiv-card .qtext { font-size: 15px; font-weight: 600; color: var(--text); line-height: 1.6; }
+        .motiv-card .qimg { width: 100%; border-radius: var(--radius-sm); margin-top: 12px; border: 1px solid var(--border); }
+        .motiv-card .hint { margin-top: 14px; font-family: 'Space Mono', monospace; font-size: 11px; color: var(--text-light); display: flex; align-items: center; gap: 8px; }
+        .motiv-card .hint .arrow { transition: transform 0.25s ease; display: inline-block; }
+        .motiv-card.open .hint .arrow { transform: rotate(90deg); }
+        .motiv-card .answer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+        .motiv-card.open .answer { max-height: 500px; }
+        .motiv-card .answer-inner { margin-top: 14px; padding-top: 14px; border-top: 2px dashed var(--border); display: flex; gap: 12px; align-items: flex-start; }
         .motiv-card .answer-stamp {
             flex: none;
             width: 28px;
@@ -461,30 +225,12 @@
             font-weight: 800;
             animation: pop 0.3s ease;
         }
-
         @keyframes pop {
-            0% {
-                transform: scale(0.4) rotate(-15deg);
-                opacity: 0;
-            }
-            100% {
-                transform: scale(1) rotate(0);
-                opacity: 1;
-            }
+            0% { transform: scale(0.4) rotate(-15deg); opacity: 0; }
+            100% { transform: scale(1) rotate(0); opacity: 1; }
         }
-
-        .motiv-card .answer-text {
-            font-size: 14.5px;
-            color: var(--text);
-            white-space: pre-line;
-        }
-
-        .motiv-card .tf-pills {
-            display: flex;
-            gap: 10px;
-            margin-top: 4px;
-        }
-
+        .motiv-card .answer-text { font-size: 14.5px; color: var(--text); white-space: pre-line; }
+        .motiv-card .tf-pills { display: flex; gap: 10px; margin-top: 4px; }
         .motiv-card .tf-pill {
             font-weight: 600;
             font-size: 13px;
@@ -493,21 +239,10 @@
             border: 2px solid var(--border);
             color: var(--text-light);
         }
+        .motiv-card .tf-pill.correct { background: var(--gold-light); border-color: var(--gold); color: var(--gold); }
+        .motiv-card .tf-pill.incorrect { opacity: 0.4; text-decoration: line-through; }
 
-        .motiv-card .tf-pill.correct {
-            background: var(--gold-light);
-            border-color: var(--gold);
-            color: var(--gold);
-        }
-
-        .motiv-card .tf-pill.incorrect {
-            opacity: 0.4;
-            text-decoration: line-through;
-        }
-
-        /* ============================================
-           FOOTER — মোটিভেশনাল
-           ============================================ */
+        /* ===== FOOTER ===== */
         .motiv-footer {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
             color: rgba(255, 255, 255, 0.85);
@@ -515,7 +250,6 @@
             margin-top: 50px;
             border-top: 5px solid var(--gold);
         }
-
         .motiv-footer-inner {
             max-width: 1200px;
             margin: 0 auto;
@@ -523,32 +257,10 @@
             grid-template-columns: 1.2fr 1fr 1fr;
             gap: 30px;
         }
-
-        .motiv-footer-col h4 {
-            font-family: 'Baloo Da 2', sans-serif;
-            font-size: 18px;
-            color: var(--gold);
-            margin-bottom: 8px;
-        }
-
-        .motiv-footer-col p,
-        .motiv-footer-col li {
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.7);
-            line-height: 1.9;
-        }
-
-        .motiv-footer-col ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .motiv-footer-col ul li::before {
-            content: "◆ ";
-            color: var(--gold);
-            font-size: 10px;
-        }
-
+        .motiv-footer-col h4 { font-family: 'Baloo Da 2', sans-serif; font-size: 18px; color: var(--gold); margin-bottom: 8px; }
+        .motiv-footer-col p, .motiv-footer-col li { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.9; }
+        .motiv-footer-col ul { list-style: none; padding: 0; }
+        .motiv-footer-col ul li::before { content: "◆ "; color: var(--gold); font-size: 10px; }
         .motiv-footer-quote {
             font-family: 'Baloo Da 2', sans-serif;
             font-size: 16px;
@@ -559,12 +271,7 @@
             border-top: 1px solid rgba(255, 255, 255, 0.06);
             border-bottom: 1px solid rgba(255, 255, 255, 0.06);
         }
-
-        .motiv-footer-quote span {
-            color: #fff;
-            font-weight: 300;
-        }
-
+        .motiv-footer-quote span { color: #fff; font-weight: 300; }
         .motiv-footer-bottom {
             max-width: 1200px;
             margin: 18px auto 0;
@@ -579,63 +286,53 @@
             color: rgba(255, 255, 255, 0.35);
         }
 
-        /* ============================================
-           রেসপন্সিভ
-           ============================================ */
+        /* ===== রেসপন্সিভ ===== */
         @media (max-width: 860px) {
-            .motiv-hero-inner {
-                grid-template-columns: 1fr;
-            }
-
-            .motiv-cert-card {
-                transform: none;
-                order: -1;
-            }
-
-            .motiv-footer-inner {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .motiv-header-top {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 6px;
-            }
-
-            .motiv-header-right {
-                justify-content: space-between;
-            }
-
-            .motiv-quote {
-                max-width: 100%;
-            }
+            .motiv-hero-inner { grid-template-columns: 1fr; }
+            .motiv-cert-card { transform: none; order: -1; }
+            .motiv-footer-inner { grid-template-columns: 1fr; gap: 20px; }
+            .motiv-header-top { flex-direction: column; align-items: stretch; gap: 6px; }
+            .motiv-header-right { justify-content: space-between; }
         }
-
         @media (max-width: 480px) {
-            .motiv-title-main {
-                font-size: 17px;
-            }
-
-            .motiv-icon {
-                font-size: 26px;
-                padding: 4px 8px;
-            }
-
-            .motiv-hero {
-                padding: 28px 16px 22px;
-            }
-
-            .motiv-card {
-                padding: 14px;
-            }
+            .motiv-title-main { font-size: 17px; }
+            .motiv-icon { font-size: 26px; padding: 4px 8px; }
+            .motiv-hero { padding: 28px 16px 22px; }
+            .motiv-card { padding: 14px; }
         }
+
+        /* ===== নেভিগেশন ===== */
+        .chapternav {
+            display: flex;
+            gap: 6px;
+            overflow-x: auto;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.05);
+            border-top: 1px solid rgba(255,255,255,0.06);
+            scrollbar-width: none;
+        }
+        .chapternav::-webkit-scrollbar { display: none; }
+        .chapternav a {
+            flex: none;
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            font-weight: 700;
+            color: rgba(255,255,255,0.7);
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 5px 14px;
+            border-radius: 30px;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: 0.15s;
+        }
+        .chapternav a:hover { background: var(--gold); color: var(--primary); border-color: var(--gold); }
     </style>
 </head>
 <body>
 
     <!-- ==========================================
-    HEADER — মোটিভেশনাল
+    HEADER
     ========================================== -->
     <header class="motiv-header">
         <div class="motiv-header-top">
@@ -653,10 +350,12 @@
                 <div class="motiv-quote">"নিরাপদ খাদ্য, সুস্থ জীবন"</div>
             </div>
         </div>
+        <!-- নেভিগেশন -->
+        <nav class="chapternav" id="chapternav"></nav>
     </header>
 
     <!-- ==========================================
-    HERO — মোটিভেশনাল ব্যানার
+    HERO
     ========================================== -->
     <section class="motiv-hero">
         <div class="motiv-hero-inner">
@@ -667,7 +366,7 @@
                     <span class="gold">খাদ্য নিরাপত্তা</span> পরীক্ষায় সফল হন
                 </h1>
                 <p>
-                    ১৩টি অধ্যায়ের প্রতিটি প্রশ্ন ও উত্তর — কার্ডে ট্যাপ করুন, শিখুন,
+                    ২৬টি অধ্যায়ের প্রতিটি প্রশ্ন ও উত্তর — কার্ডে ট্যাপ করুন, শিখুন,
                     এবং নিজেকে প্রমাণ করুন।
                 </p>
                 <div class="motiv-stats">
@@ -676,7 +375,7 @@
                         <span class="label">মোট প্রশ্ন</span>
                     </div>
                     <div class="motiv-stat-box">
-                        <span class="num">১৩</span>
+                        <span class="num">২৬</span>
                         <span class="label">অধ্যায়</span>
                     </div>
                     <div class="motiv-stat-box">
@@ -709,7 +408,7 @@
     <main id="chapters"></main>
 
     <!-- ==========================================
-    FOOTER — মোটিভেশনাল
+    FOOTER
     ========================================== -->
     <footer class="motiv-footer">
         <div class="motiv-footer-inner">
@@ -728,7 +427,7 @@
                 <h4>📋 পরীক্ষার তথ্য</h4>
                 <ul>
                     <li>মোট প্রশ্ন: ১৮৪টি</li>
-                    <li>অধ্যায়: ১৩টি</li>
+                    <li>অধ্যায়: ২৬টি</li>
                     <li>উত্তর: PDF যাচাইকৃত</li>
                     <li>প্রস্তাবিত সময়: ৯০ মিনিট</li>
                 </ul>
@@ -755,7 +454,7 @@
     </footer>
 
     <!-- ==========================================
-    JAVASCRIPT — ১৮৪টি প্রশ্ন (মার্জ করা)
+    JAVASCRIPT — সব প্রশ্ন
     ========================================== -->
     <script>
         const CHAPTERS = [{
@@ -1143,12 +842,12 @@
                 const head = document.createElement('div');
                 head.className = 'motiv-chapter-head';
                 head.innerHTML = `
-              <div class="motiv-chapter-num">${ch.n}</div>
-              <div class="motiv-chapter-title">
-                <h2>${ch.title}</h2>
-                <div class="sub">${ch.sub}</div>
-              </div>
-            `;
+                  <div class="motiv-chapter-num">${ch.n}</div>
+                  <div class="motiv-chapter-title">
+                    <h2>${ch.title}</h2>
+                    <div class="sub">${ch.sub}</div>
+                  </div>
+                `;
                 section.appendChild(head);
 
                 const grid = document.createElement('div');
@@ -1168,22 +867,22 @@
                     if (item.t === 'tf') {
                         const isTrue = item.a.trim() === 'সত্য';
                         tfHtml = `<div class="tf-pills">
-                      <span class="tf-pill ${isTrue ? 'correct' : 'incorrect'}">সত্য</span>
-                      <span class="tf-pill ${!isTrue ? 'correct' : 'incorrect'}">মিথ্যা</span>
-                    </div>`;
+                          <span class="tf-pill ${isTrue ? 'correct' : 'incorrect'}">সত্য</span>
+                          <span class="tf-pill ${!isTrue ? 'correct' : 'incorrect'}">মিথ্যা</span>
+                        </div>`;
                         answerBody = '';
                     }
 
                     card.innerHTML = `
-                  <span class="tag ${TAG_CLASS[item.t]}">${TAG_LABEL[item.t]}</span>
-                  <div class="qtext">${ch.n}.${idx + 1} — ${item.q}</div>
-                  ${imgHtml}
-                  <div class="hint"><span class="arrow">▸</span> <span class="hint-txt">উত্তর দেখতে ট্যাপ করুন</span></div>
-                  <div class="answer"><div class="answer-inner">
-                    <div class="answer-stamp">✓</div>
-                    <div>${tfHtml}${answerBody}</div>
-                  </div></div>
-                `;
+                      <span class="tag ${TAG_CLASS[item.t]}">${TAG_LABEL[item.t]}</span>
+                      <div class="qtext">${ch.n}.${idx + 1} — ${item.q}</div>
+                      ${imgHtml}
+                      <div class="hint"><span class="arrow">▸</span> <span class="hint-txt">উত্তর দেখতে ট্যাপ করুন</span></div>
+                      <div class="answer"><div class="answer-inner">
+                        <div class="answer-stamp">✓</div>
+                        <div>${tfHtml}${answerBody}</div>
+                      </div></div>
+                    `;
 
                     card.addEventListener('click', () => {
                         card.classList.toggle('open');
@@ -1197,6 +896,8 @@
                 section.appendChild(grid);
                 main.appendChild(section);
             });
+        } else {
+            console.error('nav বা chapters এলিমেন্ট পাওয়া যায়নি!');
         }
     </script>
 
