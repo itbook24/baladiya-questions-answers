@@ -43,7 +43,7 @@
         }
         body {
             font-family: 'Hind Siliguri', sans-serif;
-            background: #0c0e17;
+            background: #0a0c14;
             color: #f0f2f8;
             line-height: 1.7;
             overflow-x: hidden;
@@ -125,14 +125,32 @@
             flex-shrink: 0;
         }
 
-        /* ─── ৩D পার্টিকেল ব্যাকগ্রাউন্ড ─── */
-        #canvas-bg {
+        /* ─── ব্যাকগ্রাউন্ড - Exam Preparation থিম ─── */
+        #exam-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: 0;
+            pointer-events: none;
+            background: 
+                radial-gradient(ellipse at 20% 50%, rgba(230, 126, 34, 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 50%, rgba(243, 156, 18, 0.05) 0%, transparent 60%),
+                linear-gradient(180deg, #0a0c14 0%, #141826 50%, #0a0c14 100%);
+        }
+        #exam-bg::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(230, 126, 34, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(243, 156, 18, 0.03) 0%, transparent 50%),
+                repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(255,255,255,0.005) 40px, rgba(255,255,255,0.005) 41px),
+                repeating-linear-gradient(-45deg, transparent, transparent 40px, rgba(255,255,255,0.005) 40px, rgba(255,255,255,0.005) 41px);
             pointer-events: none;
         }
 
@@ -142,7 +160,7 @@
             top: 0;
             z-index: 100;
             padding: 16px 0;
-            background: rgba(12, 14, 23, 0.75);
+            background: rgba(10, 12, 20, 0.85);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.04);
@@ -157,25 +175,28 @@
             align-items: center;
             gap: 14px;
             font-weight: 800;
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             color: #fff;
         }
         .navbar-brand img {
-            height: 48px;
+            height: 44px;
             width: auto;
-            border-radius: 14px;
+            border-radius: 12px;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
             transition: transform 0.3s;
         }
         .navbar-brand img:hover {
             transform: rotateY(12deg) scale(1.04);
         }
+        .navbar-brand span {
+            font-size: 1rem;
+        }
         .navbar-links {
             display: flex;
             align-items: center;
-            gap: 40px;
+            gap: 32px;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: rgba(255, 255, 255, 0.7);
         }
         .navbar-links a {
@@ -222,7 +243,7 @@
         .hero {
             position: relative;
             z-index: 1;
-            padding: 80px 0 100px;
+            padding: 60px 0 80px;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -230,11 +251,11 @@
         .hero .container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 70px;
+            gap: 50px;
             align-items: center;
         }
         .hero-content h1 {
-            font-size: 4rem;
+            font-size: 3.6rem;
             font-weight: 800;
             line-height: 1.1;
             letter-spacing: -0.02em;
@@ -262,17 +283,17 @@
             filter: blur(4px);
         }
         .hero-content p {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             color: rgba(255, 255, 255, 0.75);
             max-width: 520px;
-            margin-bottom: 34px;
+            margin-bottom: 30px;
             line-height: 1.8;
             text-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
         }
         .hero-actions {
             display: flex;
             flex-wrap: wrap;
-            gap: 18px;
+            gap: 16px;
             align-items: center;
         }
         .hero-badge {
@@ -280,29 +301,29 @@
             background: rgba(230, 126, 34, 0.18);
             color: #f39c12;
             font-weight: 700;
-            font-size: 0.85rem;
-            padding: 6px 22px;
+            font-size: 0.8rem;
+            padding: 6px 20px;
             border-radius: 40px;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             letter-spacing: 0.04em;
             backdrop-filter: blur(4px);
             border: 1px solid rgba(230, 126, 34, 0.15);
         }
         .hero-stats {
             display: flex;
-            gap: 28px;
-            margin-top: 28px;
+            gap: 24px;
+            margin-top: 24px;
         }
         .hero-stats .stat-item {
             display: flex;
             align-items: center;
             gap: 8px;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: rgba(255, 255, 255, 0.7);
         }
         .hero-stats .stat-item strong {
             color: #fff;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
         }
 
         /* ─── ৩D ফোন মকআপ ─── */
@@ -314,30 +335,30 @@
         }
         .phone-3d {
             width: 100%;
-            max-width: 380px;
-            transform: rotateY(-8deg) rotateX(6deg) translateZ(20px);
+            max-width: 340px;
+            transform: rotateY(-6deg) rotateX(4deg) translateZ(20px);
             transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(255, 255, 255, 0.06);
-            border-radius: 42px;
+            border-radius: 38px;
             background: linear-gradient(145deg, #1e1f2b, #14161f);
-            padding: 14px;
+            padding: 12px;
             position: relative;
         }
         .phone-3d:hover {
-            transform: rotateY(-4deg) rotateX(4deg) translateZ(40px) scale(1.02);
+            transform: rotateY(-3deg) rotateX(3deg) translateZ(30px) scale(1.01);
         }
         .phone-3d img {
-            border-radius: 32px;
+            border-radius: 28px;
             width: 100%;
             height: auto;
-            aspect-ratio: 9 / 16;
+            aspect-ratio: 9 / 19.5;
             object-fit: cover;
             box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.5);
         }
         .phone-3d .glow-ring {
             position: absolute;
             inset: -6px;
-            border-radius: 48px;
+            border-radius: 44px;
             background: conic-gradient(from 0deg, rgba(230, 126, 34, 0.15), rgba(243, 156, 18, 0.05), rgba(230, 126, 34, 0.15));
             filter: blur(12px);
             z-index: -1;
@@ -345,19 +366,15 @@
             animation: spinGlow 12s linear infinite;
         }
         @keyframes spinGlow {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         /* ─── স্ট্যাটস ─── */
         .stats {
             position: relative;
             z-index: 1;
-            padding: 40px 0;
+            padding: 30px 0;
             background: rgba(255, 255, 255, 0.02);
             backdrop-filter: blur(10px);
             border-top: 1px solid rgba(255, 255, 255, 0.04);
@@ -366,11 +383,11 @@
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 32px;
+            gap: 24px;
             text-align: center;
         }
         .stats-grid .stat h3 {
-            font-size: 2.8rem;
+            font-size: 2.4rem;
             font-weight: 800;
             background: linear-gradient(135deg, #f39c12, #e67e22);
             -webkit-background-clip: text;
@@ -378,7 +395,7 @@
             background-clip: text;
         }
         .stats-grid .stat p {
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: rgba(255, 255, 255, 0.6);
             font-weight: 500;
             margin-top: 4px;
@@ -388,80 +405,81 @@
         .features {
             position: relative;
             z-index: 1;
-            padding: 100px 0;
-            background: rgba(12, 14, 23, 0.6);
+            padding: 80px 0;
+            background: rgba(10, 12, 20, 0.6);
             backdrop-filter: blur(6px);
         }
         .section-label {
             display: inline-block;
             font-weight: 700;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 0.08em;
             color: #f39c12;
             background: rgba(230, 126, 34, 0.12);
-            padding: 6px 22px;
+            padding: 6px 20px;
             border-radius: 40px;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
             border: 1px solid rgba(230, 126, 34, 0.08);
         }
         .section-title {
-            font-size: 3rem;
+            font-size: 2.6rem;
             font-weight: 800;
             color: #fff;
             line-height: 1.15;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             text-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
         }
         .section-sub {
-            font-size: 1.15rem;
+            font-size: 1.05rem;
             color: rgba(255, 255, 255, 0.6);
             max-width: 600px;
-            margin-bottom: 52px;
+            margin-bottom: 44px;
         }
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 36px;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 28px;
         }
         .feature-card {
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(12px);
-            padding: 40px 30px;
-            border-radius: 28px;
+            padding: 32px 24px;
+            border-radius: 24px;
             border: 1px solid rgba(255, 255, 255, 0.05);
             transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
         }
         .feature-card:hover {
-            transform: translateY(-12px) scale(1.02);
+            transform: translateY(-10px) scale(1.01);
             border-color: rgba(230, 126, 34, 0.3);
             box-shadow: 0 24px 60px rgba(230, 126, 34, 0.12);
             background: rgba(255, 255, 255, 0.06);
         }
         .feature-card .icon {
-            font-size: 3rem;
-            margin-bottom: 18px;
+            font-size: 2.6rem;
+            margin-bottom: 14px;
             display: block;
             filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3));
         }
         .feature-card h3 {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             color: #fff;
         }
         .feature-card p {
             color: rgba(255, 255, 255, 0.6);
-            font-size: 0.98rem;
+            font-size: 0.92rem;
         }
 
-        /* ─── স্ক্রিনশট (৩D কার্ড) ─── */
+        /* ─── স্ক্রিনশট স্লাইডশো ─── */
         .screenshots {
             position: relative;
             z-index: 1;
-            padding: 100px 0;
-            background: rgba(12, 14, 23, 0.4);
+            padding: 80px 0 100px;
+            background: rgba(10, 12, 20, 0.4);
+            overflow: hidden;
         }
         .screenshots .section-title {
             text-align: center;
@@ -471,71 +489,131 @@
             margin-left: auto;
             margin-right: auto;
         }
-        .screenshot-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 28px;
-            margin-top: 24px;
-            max-width: 100%;
-        }
-        .screenshot-card {
+
+        .slider-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow: hidden;
             border-radius: 28px;
+            padding: 10px 0;
+        }
+
+        .slider-track {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        .slider-slide {
+            min-width: calc(25% - 15px);
+            flex-shrink: 0;
+            border-radius: 20px;
             overflow: hidden;
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.06);
             box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            transform: perspective(800px) rotateY(0deg) rotateX(0deg);
-            max-width: 100%;
+            transition: all 0.4s ease;
         }
-        .screenshot-card:hover {
-            transform: perspective(800px) rotateY(-4deg) rotateX(4deg) translateY(-12px);
-            box-shadow: 0 32px 70px rgba(230, 126, 34, 0.15);
-            border-color: rgba(230, 126, 34, 0.25);
+        .slider-slide:hover {
+            transform: scale(1.03);
+            border-color: rgba(230, 126, 34, 0.3);
+            box-shadow: 0 24px 60px rgba(230, 126, 34, 0.12);
         }
-        .screenshot-card img {
+        .slider-slide img {
             width: 100%;
             height: auto;
-            aspect-ratio: 9 / 16;
+            aspect-ratio: 9 / 19.5;
             object-fit: cover;
-            border-radius: 28px 28px 0 0;
+            display: block;
             background: #1a1c28;
         }
-        .screenshot-card .caption {
-            padding: 16px 18px;
+        .slider-slide .caption {
+            padding: 12px 14px;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: rgba(255, 255, 255, 0.8);
             text-align: center;
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(4px);
+        }
+
+        /* স্লাইডার কন্ট্রোল */
+        .slider-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .slider-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            font-size: 1.4rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(8px);
+        }
+        .slider-btn:hover {
+            background: rgba(230, 126, 34, 0.2);
+            border-color: #e67e22;
+            transform: scale(1.1);
+        }
+        .slider-dots {
+            display: flex;
+            gap: 10px;
+        }
+        .slider-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0;
+        }
+        .slider-dot.active {
+            background: #e67e22;
+            transform: scale(1.2);
+        }
+        .slider-dot:hover {
+            background: rgba(230, 126, 34, 0.6);
         }
 
         /* ─── কন্টেন্ট প্রিভিউ ─── */
         .about-content {
             position: relative;
             z-index: 1;
-            padding: 100px 0;
-            background: rgba(12, 14, 23, 0.7);
+            padding: 80px 0;
+            background: rgba(10, 12, 20, 0.7);
             backdrop-filter: blur(8px);
         }
         .about-content .container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 70px;
+            gap: 60px;
             align-items: center;
         }
         .about-content .content-list {
             list-style: none;
-            margin-top: 28px;
+            margin-top: 24px;
         }
         .about-content .content-list li {
             display: flex;
             align-items: flex-start;
-            gap: 16px;
-            padding: 14px 0;
+            gap: 14px;
+            padding: 12px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            font-size: 1.05rem;
+            font-size: 1rem;
             color: rgba(255, 255, 255, 0.8);
         }
         .about-content .content-list li:last-child {
@@ -544,7 +622,7 @@
         .about-content .content-list li::before {
             content: "✦";
             color: #f39c12;
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             flex-shrink: 0;
             margin-top: 2px;
         }
@@ -552,13 +630,15 @@
             perspective: 1000px;
         }
         .about-content .image-wrapper img {
-            border-radius: 32px;
+            border-radius: 28px;
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
             transform: rotateY(4deg) rotateX(-2deg);
             transition: transform 0.6s ease;
             border: 1px solid rgba(255, 255, 255, 0.05);
             width: 100%;
             height: auto;
+            aspect-ratio: 9 / 19.5;
+            object-fit: cover;
         }
         .about-content .image-wrapper img:hover {
             transform: rotateY(0deg) rotateX(0deg) scale(1.01);
@@ -568,38 +648,38 @@
         .cta {
             position: relative;
             z-index: 1;
-            padding: 100px 0;
-            background: linear-gradient(145deg, rgba(230, 126, 34, 0.08), rgba(12, 14, 23, 0.9));
+            padding: 80px 0;
+            background: linear-gradient(145deg, rgba(230, 126, 34, 0.06), rgba(10, 12, 20, 0.9));
             text-align: center;
             border-top: 1px solid rgba(255, 255, 255, 0.03);
         }
         .cta h2 {
-            font-size: 3rem;
+            font-size: 2.6rem;
             font-weight: 800;
             color: #fff;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
         .cta p {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: rgba(255, 255, 255, 0.6);
             max-width: 620px;
-            margin: 0 auto 40px;
+            margin: 0 auto 36px;
         }
         .cta .btn-group {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 20px;
+            gap: 16px;
         }
 
         /* ─── ফুটার ─── */
         .footer {
             position: relative;
             z-index: 1;
-            padding: 48px 0 32px;
-            background: rgba(12, 14, 23, 0.9);
+            padding: 40px 0 28px;
+            background: rgba(10, 12, 20, 0.9);
             border-top: 1px solid rgba(255, 255, 255, 0.03);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: rgba(255, 255, 255, 0.4);
         }
         .footer .container {
@@ -607,27 +687,29 @@
             flex-wrap: wrap;
             justify-content: space-between;
             align-items: center;
-            gap: 16px;
+            gap: 14px;
         }
         .footer .footer-brand {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             font-weight: 700;
             color: #fff;
+            font-size: 0.95rem;
         }
         .footer .footer-brand img {
-            height: 38px;
+            height: 34px;
             width: auto;
-            border-radius: 10px;
+            border-radius: 8px;
         }
         .footer-links {
             display: flex;
-            gap: 32px;
+            gap: 24px;
         }
         .footer-links a {
             transition: color 0.2s;
             font-weight: 500;
+            font-size: 0.85rem;
         }
         .footer-links a:hover {
             color: #f39c12;
@@ -650,16 +732,16 @@
                 justify-content: center;
             }
             .hero-content h1 {
-                font-size: 3rem;
+                font-size: 2.8rem;
             }
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
             .section-title {
-                font-size: 2.4rem;
+                font-size: 2.2rem;
             }
             .phone-3d {
-                max-width: 320px;
+                max-width: 280px;
                 margin: 0 auto;
             }
             .phone-wrapper {
@@ -671,9 +753,11 @@
             .phone-3d:hover {
                 transform: rotateY(0deg) rotateX(0deg) scale(1.02);
             }
-            .screenshot-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
+            .slider-slide {
+                min-width: calc(33.33% - 14px);
+            }
+            .navbar-brand span {
+                font-size: 0.85rem;
             }
         }
 
@@ -681,13 +765,13 @@
             .navbar-links {
                 display: none;
                 flex-direction: column;
-                gap: 20px;
+                gap: 16px;
                 position: absolute;
                 top: 100%;
                 left: 0;
                 right: 0;
-                background: rgba(12, 14, 23, 0.96);
-                padding: 32px 24px;
+                background: rgba(10, 12, 20, 0.96);
+                padding: 28px 20px;
                 backdrop-filter: blur(20px);
                 border-bottom: 1px solid rgba(255, 255, 255, 0.04);
             }
@@ -701,78 +785,127 @@
                 display: inline-flex;
             }
             .hero-content h1 {
-                font-size: 2.4rem;
+                font-size: 2.2rem;
             }
             .hero {
-                padding: 50px 0 70px;
+                padding: 40px 0 60px;
                 min-height: auto;
             }
-            .screenshot-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 16px;
+            .slider-slide {
+                min-width: calc(50% - 10px);
             }
             .stats-grid {
                 grid-template-columns: 1fr 1fr;
-                gap: 12px;
+                gap: 10px;
             }
             .stats-grid .stat h3 {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
             .cta h2 {
-                font-size: 2.2rem;
+                font-size: 2rem;
             }
             .footer .container {
                 flex-direction: column;
                 text-align: center;
             }
             .btn {
-                padding: 14px 28px;
-                font-size: 0.95rem;
+                padding: 14px 24px;
+                font-size: 0.9rem;
             }
             .features-grid {
                 grid-template-columns: 1fr;
             }
+            .screenshots {
+                padding: 60px 0 80px;
+            }
+            .about-content {
+                padding: 60px 0;
+            }
+            .features {
+                padding: 60px 0;
+            }
+            .cta {
+                padding: 60px 0;
+            }
+            .navbar-brand span {
+                font-size: 0.8rem;
+            }
         }
 
         @media (max-width: 480px) {
-            .screenshot-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 12px;
+            .slider-slide {
+                min-width: calc(50% - 8px);
             }
             .container {
-                padding: 0 16px;
+                padding: 0 14px;
             }
             .hero-content h1 {
                 font-size: 1.8rem;
             }
             .section-title {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
             }
             .phone-3d {
-                max-width: 260px;
-                padding: 10px;
-                border-radius: 32px;
+                max-width: 220px;
+                padding: 8px;
+                border-radius: 28px;
+            }
+            .phone-3d img {
+                border-radius: 20px;
+            }
+            .hero-stats {
+                gap: 14px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .hero-stats .stat-item {
+                font-size: 0.8rem;
+            }
+            .slider-controls {
+                gap: 12px;
+            }
+            .slider-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+            }
+            .stats-grid .stat h3 {
+                font-size: 1.5rem;
+            }
+            .stats-grid .stat p {
+                font-size: 0.8rem;
+            }
+            .footer-links {
+                gap: 14px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .feature-card {
+                padding: 24px 18px;
+            }
+            .feature-card .icon {
+                font-size: 2rem;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- ─── ৩D পার্টিকেল ক্যানভাস ─── -->
-    <canvas id="canvas-bg"></canvas>
+    <!-- ─── Exam Preparation থিম ব্যাকগ্রাউন্ড ─── -->
+    <div id="exam-bg"></div>
 
     <!-- ─── ন্যাভবার ─── -->
     <header class="navbar" id="top">
         <div class="container">
             <a href="#" class="navbar-brand">
                 <img src="https://itbook24.github.io/baladiya-questions-answers/ksa-baladiya-logo.png" alt="বলদিয়া লোগো" />
-                <span>সৌদি বলদিয়া পরীক্ষার প্রশ্ন ও উত্তর</span>
+                <span>সৌদি বলদিয়া</span>
             </a>
             <nav class="navbar-links" id="navLinks">
                 <a href="#features">ফিচার</a>
                 <a href="#screenshots">স্ক্রিনশট</a>
                 <a href="#about">বিষয়বস্তু</a>
-                <a href="#download" class="btn btn-primary nav-cta" style="padding:10px 28px;font-size:0.9rem;">ডাউনলোড</a>
+                <a href="#download" class="btn btn-primary nav-cta" style="padding:8px 22px;font-size:0.85rem;">ডাউনলোড</a>
             </nav>
             <button class="hamburger" id="hamburger" aria-label="মেনু টগল">
                 <span></span><span></span><span></span>
@@ -862,7 +995,7 @@
         </div>
     </section>
 
-    <!-- ─── স্ক্রিনশট ─── -->
+    <!-- ─── স্ক্রিনশট স্লাইডশো ─── -->
     <section class="screenshots" id="screenshots">
         <div class="container">
             <span class="section-label">📸 প্রিভিউ</span>
@@ -870,26 +1003,44 @@
             <p class="section-sub">
                 বাস্তব প্রশ্ন ও উত্তর — যা বলদিয়া পরীক্ষায় ঠিক মতো তৈরি।
             </p>
-            <div class="screenshot-grid">
-                <div class="screenshot-card">
-                    <img src="https://i.ibb.co/LDZsY6DL/2.jpg" alt="স্ক্রিনশট ১" loading="lazy" />
-                    <div class="caption">📖 প্র্যাকটিস প্রশ্ন</div>
-                </div>
-                <div class="screenshot-card">
-                    <img src="https://i.ibb.co/PvnRvtYY/4.jpg" alt="স্ক্রিনশট ২" loading="lazy" />
-                    <div class="caption">📚 অধ্যায় ১০ · ফুড সেফটি</div>
-                </div>
-                <div class="screenshot-card">
-                    <img src="https://i.ibb.co/ZpSNqtVH/5.jpg" alt="স্ক্রিনশট ৩" loading="lazy" />
-                    <div class="caption">🌡️ তাপমাত্রা ও স্টোরেজ</div>
-                </div>
-                <div class="screenshot-card">
-                    <img src="https://i.ibb.co/chMPq31X/3.jpg" alt="স্ক্রিনশট ৪" loading="lazy" />
-                    <div class="caption">🧪 রাসায়নিক ও পদার্থগত ঝুঁকি</div>
+
+            <div class="slider-container">
+                <div class="slider-track" id="sliderTrack">
+                    <div class="slider-slide">
+                        <img src="https://i.ibb.co/mnmjx2J/Home-screen.jpg" alt="হোম স্ক্রিন" loading="lazy" />
+                        <div class="caption">🏠 হোম স্ক্রিন</div>
+                    </div>
+                    <div class="slider-slide">
+                        <img src="https://i.ibb.co/LDZsY6DL/2.jpg" alt="প্র্যাকটিস প্রশ্ন" loading="lazy" />
+                        <div class="caption">📖 প্র্যাকটিস প্রশ্ন</div>
+                    </div>
+                    <div class="slider-slide">
+                        <img src="https://i.ibb.co/PvnRvtYY/4.jpg" alt="অধ্যায় ১০" loading="lazy" />
+                        <div class="caption">📚 অধ্যায় ১০ · ফুড সেফটি</div>
+                    </div>
+                    <div class="slider-slide">
+                        <img src="https://i.ibb.co/ZpSNqtVH/5.jpg" alt="তাপমাত্রা" loading="lazy" />
+                        <div class="caption">🌡️ তাপমাত্রা ও স্টোরেজ</div>
+                    </div>
+                    <div class="slider-slide">
+                        <img src="https://i.ibb.co/chMPq31X/3.jpg" alt="রাসায়নিক ঝুঁকি" loading="lazy" />
+                        <div class="caption">🧪 রাসায়নিক ও পদার্থগত ঝুঁকি</div>
+                    </div>
+                    <div class="slider-slide">
+                        <img src="https://i.ibb.co/mnmjx2J/Home-screen.jpg" alt="হোম স্ক্রিন ২" loading="lazy" />
+                        <div class="caption">🏠 হোম স্ক্রিন</div>
+                    </div>
                 </div>
             </div>
-            <p style="text-align:center;margin-top:28px;font-size:0.95rem;color:rgba(255,255,255,0.4);">
-                * আরও স্ক্রিনশট অ্যাপের ভিতরে
+
+            <div class="slider-controls">
+                <button class="slider-btn" id="prevBtn" aria-label="পূর্ববর্তী">‹</button>
+                <div class="slider-dots" id="sliderDots"></div>
+                <button class="slider-btn" id="nextBtn" aria-label="পরবর্তী">›</button>
+            </div>
+
+            <p style="text-align:center;margin-top:24px;font-size:0.9rem;color:rgba(255,255,255,0.35);">
+                * স্লাইড করুন আরও স্ক্রিনশট দেখতে
             </p>
         </div>
     </section>
@@ -900,7 +1051,7 @@
             <div class="content-text">
                 <span class="section-label">📘 ভিতরে কী আছে</span>
                 <h2 class="section-title">বলদিয়া সিলেবাসের সম্পূর্ণ কাভারেজ</h2>
-                <p style="color:rgba(255,255,255,0.7);font-size:1.05rem;margin-bottom:8px;">
+                <p style="color:rgba(255,255,255,0.7);font-size:1rem;margin-bottom:6px;">
                     আমাদের প্রশ্নব্যাংক অফিসিয়াল সোর্স ও পূর্ববর্তী পরীক্ষা থেকে তৈরি,
                     তাই আপনি জানেন কী আশা করবেন।
                 </p>
@@ -912,7 +1063,7 @@
                     <li>পরিষ্কার ও জীবাণুমুক্তকরণ পদ্ধতি</li>
                     <li>বাস্তবসম্মত পরীক্ষা সিমুলেশন</li>
                 </ul>
-                <div style="margin-top:32px;">
+                <div style="margin-top:28px;">
                     <a href="#download" class="btn btn-primary">এখনই প্র্যাকটিস শুরু করুন</a>
                 </div>
             </div>
@@ -935,13 +1086,12 @@
                 সফল হয়েছেন। আপনিও যোগ দিন।
             </p>
             <div class="btn-group">
-                <a href="#" class="btn btn-white">
+                <a href="https://github.com/itbook24/ksa-baladiya-exam/releases/download/9.8/Saudi.Baladiya.Exam.apk" class="btn btn-white">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                     অ্যান্ড্রয়েড ডাউনলোড
                 </a>
-            
             </div>
-            <p style="font-size:0.95rem;opacity:0.4;margin-top:30px;">
+            <p style="font-size:0.9rem;opacity:0.4;margin-top:28px;">
                 Coming soon Play Store
             </p>
         </div>
@@ -952,7 +1102,7 @@
         <div class="container">
             <div class="footer-brand">
                 <img src="https://itbook24.github.io/baladiya-questions-answers/ksa-baladiya-logo.png" alt="বলদিয়া লোগো" />
-                <span>সৌদি বলদিয়া পরীক্ষার প্রশ্ন ও উত্তর</span>
+                <span>সৌদি বলদিয়া</span>
             </div>
             <div class="footer-links">
                 <a href="#top">হোম</a>
@@ -961,88 +1111,158 @@
                 <a href="#about">বিষয়বস্তু</a>
                 <a href="#download">ডাউনলোড</a>
             </div>
-            <p style="font-size:0.85rem;color:rgba(255,255,255,0.3);">
+            <p style="font-size:0.8rem;color:rgba(255,255,255,0.3);">
                 &copy; ২০২৬ বলদিয়া Q&A. সর্বস্বত্ব সংরক্ষিত।
             </p>
         </div>
     </footer>
 
-    <!-- ─── ৩D পার্টিকেল স্ক্রিপ্ট ─── -->
+    <!-- ─── স্লাইডশোর স্ক্রিপ্ট ─── -->
     <script>
         (function() {
-            const canvas = document.getElementById('canvas-bg');
-            const ctx = canvas.getContext('2d');
-            let w, h;
-            const particles = [];
-            const count = 120;
+            const track = document.getElementById('sliderTrack');
+            const slides = track.querySelectorAll('.slider-slide');
+            const totalSlides = slides.length;
+            const dotsContainer = document.getElementById('sliderDots');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
 
-            function resize() {
-                w = canvas.width = window.innerWidth;
-                h = canvas.height = window.innerHeight;
-            }
-            window.addEventListener('resize', resize);
-            resize();
+            let currentIndex = 0;
+            let slidesPerView = 4;
+            let autoPlayInterval;
 
-            class Particle {
-                constructor() {
-                    this.reset();
-                }
-                reset() {
-                    this.x = Math.random() * w;
-                    this.y = Math.random() * h;
-                    this.size = Math.random() * 2.5 + 0.5;
-                    this.speedX = (Math.random() - 0.5) * 0.5;
-                    this.speedY = (Math.random() - 0.5) * 0.5;
-                    this.opacity = Math.random() * 0.5 + 0.15;
-                }
-                update() {
-                    this.x += this.speedX;
-                    this.y += this.speedY;
-                    if (this.x < 0 || this.x > w || this.y < 0 || this.y > h) {
-                        this.reset();
-                    }
-                }
-                draw() {
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                    ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
-                    ctx.fill();
+            // ডটস তৈরি
+            function createDots() {
+                dotsContainer.innerHTML = '';
+                const dotsCount = Math.ceil(totalSlides / slidesPerView);
+                for (let i = 0; i < dotsCount; i++) {
+                    const dot = document.createElement('button');
+                    dot.classList.add('slider-dot');
+                    if (i === 0) dot.classList.add('active');
+                    dot.dataset.index = i;
+                    dot.addEventListener('click', () => goToSlide(i * slidesPerView));
+                    dotsContainer.appendChild(dot);
                 }
             }
 
-            for (let i = 0; i < count; i++) {
-                particles.push(new Particle());
-            }
+            // স্লাইডে যাওয়া
+            function goToSlide(index) {
+                const maxIndex = Math.max(0, totalSlides - slidesPerView);
+                currentIndex = Math.min(index, maxIndex);
+                if (currentIndex < 0) currentIndex = 0;
+                
+                const slideWidth = slides[0].offsetWidth + 20; // width + gap
+                track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
 
-            function connectParticles() {
-                for (let i = 0; i < particles.length; i++) {
-                    for (let j = i + 1; j < particles.length; j++) {
-                        const dx = particles[i].x - particles[j].x;
-                        const dy = particles[i].y - particles[j].y;
-                        const dist = Math.sqrt(dx * dx + dy * dy);
-                        if (dist < 150) {
-                            ctx.beginPath();
-                            ctx.moveTo(particles[i].x, particles[i].y);
-                            ctx.lineTo(particles[j].x, particles[j].y);
-                            const alpha = (1 - dist / 150) * 0.12;
-                            ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
-                            ctx.lineWidth = 0.8;
-                            ctx.stroke();
-                        }
-                    }
-                }
-            }
-
-            function animate() {
-                ctx.clearRect(0, 0, w, h);
-                particles.forEach(p => {
-                    p.update();
-                    p.draw();
+                // ডটস আপডেট
+                const dots = dotsContainer.querySelectorAll('.slider-dot');
+                const activeDotIndex = Math.floor(currentIndex / slidesPerView);
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === activeDotIndex);
                 });
-                connectParticles();
-                requestAnimationFrame(animate);
             }
-            animate();
+
+            // রেসপন্সিভ স্লাইড কাউন্ট
+            function updateSlidesPerView() {
+                if (window.innerWidth < 480) {
+                    slidesPerView = 2;
+                } else if (window.innerWidth < 768) {
+                    slidesPerView = 2;
+                } else if (window.innerWidth < 992) {
+                    slidesPerView = 3;
+                } else {
+                    slidesPerView = 4;
+                }
+                createDots();
+                goToSlide(currentIndex);
+            }
+
+            // অটো প্লে
+            function startAutoPlay() {
+                stopAutoPlay();
+                autoPlayInterval = setInterval(() => {
+                    const maxIndex = Math.max(0, totalSlides - slidesPerView);
+                    if (currentIndex >= maxIndex) {
+                        goToSlide(0);
+                    } else {
+                        goToSlide(currentIndex + slidesPerView);
+                    }
+                }, 4000);
+            }
+
+            function stopAutoPlay() {
+                if (autoPlayInterval) {
+                    clearInterval(autoPlayInterval);
+                    autoPlayInterval = null;
+                }
+            }
+
+            // ইভেন্ট লিসেনার
+            prevBtn.addEventListener('click', () => {
+                stopAutoPlay();
+                const maxIndex = Math.max(0, totalSlides - slidesPerView);
+                if (currentIndex - slidesPerView < 0) {
+                    goToSlide(maxIndex);
+                } else {
+                    goToSlide(currentIndex - slidesPerView);
+                }
+                startAutoPlay();
+            });
+
+            nextBtn.addEventListener('click', () => {
+                stopAutoPlay();
+                const maxIndex = Math.max(0, totalSlides - slidesPerView);
+                if (currentIndex + slidesPerView > maxIndex) {
+                    goToSlide(0);
+                } else {
+                    goToSlide(currentIndex + slidesPerView);
+                }
+                startAutoPlay();
+            });
+
+            // উইন্ডো রিসাইজ
+            let resizeTimeout;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    updateSlidesPerView();
+                }, 200);
+            });
+
+            // মাউস ওভার হলে অটো প্লে বন্ধ
+            const sliderContainer = document.querySelector('.slider-container');
+            sliderContainer.addEventListener('mouseenter', stopAutoPlay);
+            sliderContainer.addEventListener('mouseleave', startAutoPlay);
+
+            // টাচ সাপোর্ট
+            let touchStartX = 0;
+            let touchEndX = 0;
+            sliderContainer.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+                stopAutoPlay();
+            });
+            sliderContainer.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                const diff = touchStartX - touchEndX;
+                if (Math.abs(diff) > 50) {
+                    if (diff > 0) {
+                        nextBtn.click();
+                    } else {
+                        prevBtn.click();
+                    }
+                }
+                startAutoPlay();
+            });
+
+            // শুরু করুন
+            updateSlidesPerView();
+            startAutoPlay();
+
+            // ব্র্যান্ডিং এডজাস্ট
+            setTimeout(() => {
+                const slideWidth = slides[0].offsetWidth + 20;
+                track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+            }, 100);
         })();
     </script>
 
