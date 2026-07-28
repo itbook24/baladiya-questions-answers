@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="bn">
+
 <head>
 
 <meta charset="UTF-8">
@@ -7,124 +8,227 @@
 
 <title>About | বলদিয়া প্রশ্ন ও উত্তর</title>
 
+<meta name="description" content="বলদিয়া প্রশ্ন ও উত্তর সম্পর্কে জানুন। সৌদি বলদিয়া (Baladiya) পরীক্ষার প্রস্তুতির জন্য বাংলা প্রশ্ন, উত্তর ও Food Safety গাইড।">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@700;800&display=swap" rel="stylesheet">
+
 <style>
 
-  /* ===== HEADER ===== */
-.motiv-header {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 60%, var(--secondary) 100%);
-    color: var(--white);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    border-bottom: 4px solid var(--gold);
-    box-shadow: 0 4px 20px rgba(0,0,0,.2);
+:root{
+    --primary:#0B6B4B;
+    --primary-light:#138A63;
+    --secondary:#198754;
+    --gold:#F4B400;
+    --white:#ffffff;
+}
+
+/* =========================
+        RESET
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f7f7f7;
+    color:#333;
+}
+
+/* =========================
+        HEADER
+========================= */
+
+.motiv-header{
+    background:linear-gradient(135deg,var(--primary),var(--primary-light),var(--secondary));
+    color:#fff;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    border-bottom:4px solid var(--gold);
+    box-shadow:0 4px 18px rgba(0,0,0,.15);
 }
 
 .motiv-header-top{
+
     max-width:1200px;
-    margin:0 auto;
+
+    margin:auto;
+
     padding:14px 20px;
 
     display:flex;
-    justify-content:center;   /* Center */
+
+    justify-content:center;
+
     align-items:center;
+
 }
 
 .motiv-logo{
+
     display:flex;
+
     align-items:center;
-    justify-content:center;
+
     gap:15px;
+
 }
 
 .motiv-icon{
+
     width:64px;
+
     height:64px;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
     background:#fff;
-    border-radius:14px;
+
+    border-radius:16px;
+
     padding:4px;
 
     overflow:hidden;
 
-    box-shadow:0 4px 12px rgba(0,0,0,.18);
+    box-shadow:0 4px 10px rgba(0,0,0,.15);
 
     flex-shrink:0;
+
 }
 
 .motiv-icon img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
-}
 
-.motiv-title{
-    text-align:left;
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
 }
 
 .motiv-title-main{
-    margin:0;
+
     font-family:'Baloo Da 2',sans-serif;
-    font-size:24px;
+
+    font-size:26px;
+
     font-weight:800;
+
     line-height:1.2;
+
 }
 
-.motiv-title-main .gold{
+.gold{
+
     color:var(--gold);
+
 }
 
-/* এগুলো ব্যবহার না করলে Hide */
-.motiv-title-sub,
-.motiv-header-right{
-    display:none;
+/* =========================
+      CONTENT
+========================= */
+
+.container{
+
+    max-width:900px;
+
+    margin:40px auto;
+
+    background:#fff;
+
+    padding:35px;
+
+    border-radius:12px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    line-height:1.9;
+
 }
 
-/* Mobile */
-@media (max-width:768px){
+.container h1{
 
-    .motiv-header-top{
-        padding:12px 15px;
-    }
+    color:var(--primary);
 
-    .motiv-logo{
-        gap:12px;
-    }
+    margin-bottom:20px;
 
-    .motiv-icon{
-        width:52px;
-        height:52px;
-    }
-
-    .motiv-title-main{
-        font-size:19px;
-    }
 }
 
-body{
-font-family:Arial,sans-serif;
-max-width:900px;
-margin:40px auto;
-padding:20px;
-line-height:1.8;
-color:#333;
+.container h2{
+
+    color:var(--primary);
+
+    margin-top:28px;
+
+    margin-bottom:12px;
+
 }
 
-h1,h2{
-color:#0b6b4b;
+.container ul{
+
+    padding-left:22px;
+
 }
+
+.container li{
+
+    margin-bottom:10px;
+
+}
+
+/* =========================
+        FOOTER
+========================= */
 
 footer{
-margin-top:40px;
-border-top:1px solid #ddd;
-padding-top:15px;
-text-align:center;
-color:#666;
+
+    margin-top:40px;
+
+    padding-top:20px;
+
+    border-top:1px solid #ddd;
+
+    text-align:center;
+
+    color:#666;
+
+    font-size:15px;
+
+}
+
+/* =========================
+        MOBILE
+========================= */
+
+@media(max-width:768px){
+
+.container{
+
+margin:20px;
+
+padding:25px;
+
+}
+
+.motiv-title-main{
+
+font-size:20px;
+
+}
+
+.motiv-icon{
+
+width:54px;
+
+height:54px;
+
+}
+
 }
 
 </style>
@@ -132,6 +236,40 @@ color:#666;
 </head>
 
 <body>
+
+<header class="motiv-header">
+
+<div class="motiv-header-top">
+
+<div class="motiv-logo">
+
+<div class="motiv-icon">
+
+<img
+src="https://itbook24.github.io/baladiya-questions-answers/ksa-baladiya-logo.png"
+alt="বলদিয়া প্রশ্ন ও উত্তর Logo">
+
+</div>
+
+<div class="motiv-title">
+
+<div class="motiv-title-main">
+
+সৌদি বলদিয়া পরীক্ষার
+
+<span class="gold">প্রশ্ন ও উত্তর</span>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</header>
+
+<div class="container">
 
 <h1>About</h1>
 
@@ -143,7 +281,7 @@ color:#666;
 
 <p>
 
-এই ওয়েবসাইটটি সৌদি আরবের <strong>Baladiya Food Safety Exam</strong> প্রস্তুতির জন্য তৈরি করা হয়েছে।
+এই App সৌদি আরবের <strong>Baladiya Food Safety Exam</strong> প্রস্তুতির জন্য তৈরি করা হয়েছে।
 
 </p>
 
@@ -177,39 +315,17 @@ color:#666;
 
 <p>
 
-এই ওয়েবসাইটটি শুধুমাত্র শিক্ষামূলক উদ্দেশ্যে তৈরি।
-
-এটি কোনো সরকারি সংস্থা বা সৌদি বলদিয়া কর্তৃপক্ষের অফিসিয়াল ওয়েবসাইট নয়।
+এই App শুধুমাত্র শিক্ষামূলক উদ্দেশ্যে তৈরি। এটি কোনো সরকারি সংস্থা বা সৌদি বলদিয়া কর্তৃপক্ষের অফিসিয়াল ওয়েবসাইট নয়।
 
 </p>
 
 <footer>
 
-© 2026 বলদিয়া প্রশ্ন ও উত্তর
+© 2026 <strong>বলদিয়া প্রশ্ন ও উত্তর</strong>
 
 </footer>
 
+</div>
+
 </body>
-
- <header class="motiv-header">
-    <div class="motiv-header-top">
-        <div class="motiv-logo">
-            <div class="motiv-icon">
-                <img
-                    src="https://itbook24.github.io/baladiya-questions-answers/ksa-baladiya-logo.png"
-                    alt="KSA Baladiya Logo"
-                    loading="eager"
-                    width="50"
-                    height="50">
-            </div>
-
-            <div class="motiv-title">
-                <h1 class="motiv-title-main">
-                    সৌদি বলদিয়া পরীক্ষার
-                    <span class="gold">প্রশ্ন ও উত্তর</span>
-                </h1>
-            </div>
-        </div>
-    </div>
-</header> 
 </html>
