@@ -473,9 +473,10 @@
         }
         .screenshot-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 32px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 28px;
             margin-top: 24px;
+            max-width: 100%;
         }
         .screenshot-card {
             border-radius: 28px;
@@ -485,6 +486,7 @@
             box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
             transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             transform: perspective(800px) rotateY(0deg) rotateX(0deg);
+            max-width: 100%;
         }
         .screenshot-card:hover {
             transform: perspective(800px) rotateY(-4deg) rotateX(4deg) translateY(-12px);
@@ -555,6 +557,8 @@
             transform: rotateY(4deg) rotateX(-2deg);
             transition: transform 0.6s ease;
             border: 1px solid rgba(255, 255, 255, 0.05);
+            width: 100%;
+            height: auto;
         }
         .about-content .image-wrapper img:hover {
             transform: rotateY(0deg) rotateX(0deg) scale(1.01);
@@ -666,6 +670,10 @@
             }
             .phone-3d:hover {
                 transform: rotateY(0deg) rotateX(0deg) scale(1.02);
+            }
+            .screenshot-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
             }
         }
 
