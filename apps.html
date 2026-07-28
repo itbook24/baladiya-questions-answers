@@ -473,7 +473,7 @@
             font-size: 0.92rem;
         }
 
-        /* ─── স্ক্রিনশট স্লাইডশো (ঠিক করা) ─── */
+        /* ─── স্ক্রিনশট স্লাইডশো (Tasbih সাইটের ধাঁচে) ─── */
         .screenshots {
             position: relative;
             z-index: 1;
@@ -515,7 +515,6 @@
             border: 1px solid rgba(255, 255, 255, 0.06);
             box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
             transition: all 0.4s ease;
-            /* 🔧 Zoom ঠিক করার জন্য */
             display: flex;
             flex-direction: column;
         }
@@ -524,25 +523,28 @@
             border-color: rgba(230, 126, 34, 0.3);
             box-shadow: 0 24px 60px rgba(230, 126, 34, 0.12);
         }
+        
+        /* 🔧 ছবি ঠিক করার মূল কোড (Tasbih সাইটের ধাঁচে) */
         .slider-slide img {
             width: 100%;
             height: auto;
             aspect-ratio: 9 / 19.5;
-            object-fit: contain; /* 🔧 Zoom না করে পুরো ছবি দেখাবে */
-            background: #0a0c14; /* ফাঁকা জায়গার জন্য কালো ব্যাকগ্রাউন্ড */
+            object-fit: contain;
+            background: #0a0c14;
             display: block;
             border-radius: 18px 18px 0 0;
-            /* 🔧 ছবি যেন কেটে না যায় */
             max-height: 400px;
         }
+        
         .slider-slide .caption {
-            padding: 10px 12px;
+            padding: 12px 10px;
             font-weight: 600;
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.9);
             text-align: center;
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.4);
             backdrop-filter: blur(4px);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
             flex-shrink: 0;
         }
 
@@ -645,7 +647,7 @@
             width: 100%;
             height: auto;
             aspect-ratio: 9 / 19.5;
-            object-fit: contain; /* 🔧 Zoom ঠিক করা */
+            object-fit: contain;
             background: #0a0c14;
         }
         .about-content .image-wrapper img:hover {
