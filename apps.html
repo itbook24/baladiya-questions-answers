@@ -473,7 +473,7 @@
             font-size: 0.92rem;
         }
 
-        /* ─── স্ক্রিনশট স্লাইডশো ─── */
+        /* ─── স্ক্রিনশট স্লাইডশো (ঠিক করা) ─── */
         .screenshots {
             position: relative;
             z-index: 1;
@@ -515,6 +515,9 @@
             border: 1px solid rgba(255, 255, 255, 0.06);
             box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
             transition: all 0.4s ease;
+            /* 🔧 Zoom ঠিক করার জন্য */
+            display: flex;
+            flex-direction: column;
         }
         .slider-slide:hover {
             transform: scale(1.02);
@@ -525,10 +528,12 @@
             width: 100%;
             height: auto;
             aspect-ratio: 9 / 19.5;
-            object-fit: contain;
-            background: #0a0c14;
+            object-fit: contain; /* 🔧 Zoom না করে পুরো ছবি দেখাবে */
+            background: #0a0c14; /* ফাঁকা জায়গার জন্য কালো ব্যাকগ্রাউন্ড */
             display: block;
             border-radius: 18px 18px 0 0;
+            /* 🔧 ছবি যেন কেটে না যায় */
+            max-height: 400px;
         }
         .slider-slide .caption {
             padding: 10px 12px;
@@ -538,6 +543,7 @@
             text-align: center;
             background: rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(4px);
+            flex-shrink: 0;
         }
 
         /* স্লাইডার কন্ট্রোল */
@@ -639,7 +645,7 @@
             width: 100%;
             height: auto;
             aspect-ratio: 9 / 19.5;
-            object-fit: contain;
+            object-fit: contain; /* 🔧 Zoom ঠিক করা */
             background: #0a0c14;
         }
         .about-content .image-wrapper img:hover {
